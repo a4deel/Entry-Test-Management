@@ -1,31 +1,75 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    var styleURL = "/Content/styles";
 }
+<!-- ////////////////////////////////////////////////////////////////////////////-->
+<div class="wrapper">
+    <div class="main-panel">
+        <!-- BEGIN : Main Content-->
+        <div class="main-content">
+            <div class="content-wrapper">
+                <!--Login Page Starts-->
+                <section id="login">
+                    <div class="container-fluid">
+                        <div class="row full-height-vh m-0">
+                            <div class="col-12 d-flex align-items-center justify-content-center">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <div class="card-body login-img">
+                                            <div class="row m-0">
+                                                <div class="col-lg-6 d-lg-block d-none py-2 text-center align-middle">
+                                                    <img src="@styleURL/img/gallery/logo.png" alt="" class="img-fluid mt-5" width="400"
+                                                         height="250">
+                                                </div>
+                                                <div class="col-lg-6 col-md-12 bg-white px-4 pt-3">
+                                                    <h3 class="mb-2 card-title">Login</h3>
+                                                    <p class="card-text mb-3">
+                                                        Welcome back, please login to your account.
+                                                    </p>
+                                                    <div class="login-render">
+                                                        <div class="fg-actions d-flex justify-content-between">
+                                                            <div class="recover-pass">
+                                                                <a href="/Home/UserLogin" class="text-decoration-none text-white">
+                                                                    <button class="btn btn-primary" style="width: 350px;">
+                                                                        Login As User
+                                                                    </button>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="fg-actions d-flex justify-content-between">
+                                                            <div class="recover-pass">
+                                                                <a href="/Home/AdminLogin" class="text-decoration-none text-white">
+                                                                    <button class="btn btn-primary" style="width: 350px;">
+                                                                        Login As Admin
+                                                                    </button>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="fg-actions d-flex justify-content-between">
+                                                            <div class="recover-pass">
+                                                                <a href="/Home/RegisterUser" class="text-decoration-none">
+                                                                    <button class="btn btn-primary" style="width: 350px;">
+                                                                        Register
+                                                                    </button>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--Login Page Ends-->
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+            </div>
+        </div>
+        <!-- END : End Main Content-->
     </div>
 </div>
+<!-- ////////////////////////////////////////////////////////////////////////////-->
