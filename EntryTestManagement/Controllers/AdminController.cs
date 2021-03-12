@@ -49,7 +49,7 @@ namespace EntryTestManagement.Controllers
         public ActionResult Logout()
         {
             Session.Clear();
-            return RedirectToAction("Index");
+            return RedirectToAction("AdminLogin");
         }
     }
 }

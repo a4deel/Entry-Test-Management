@@ -1,4 +1,13 @@
-﻿@{
+﻿
+<script>
+
+    if (performance.navigation.type == 2) {
+        location.reload();
+    }
+
+</script>
+@model EntryTestManagement.Models.UserLogin
+@{
     var styleURL = "/Content/styles";
 }
 <div class="wrapper">
@@ -24,27 +33,40 @@
                                                     <p class="card-text mb-3">
                                                         Fill the below form to create a new account.
                                                     </p>
-                                                    <input type="email" class="form-control mb-3" placeholder="Email" />
-                                                    <input type="password" class="form-control mb-3" placeholder="Password" />
-                                                    <input type="password" class="form-control mb-3" placeholder="Confirm Password" />
-
-                                                    <div class="fg-actions d-flex justify-content-between">
-                                                        <div class="login-btn">
-                                                            <a href="/Home/UserLogin" class="text-decoration-none">
-                                                                <button class="btn btn-outline-primary">
-                                                                    Back To Login
-
-                                                                </button>
-                                                            </a>
+                                                    @using (Html.BeginForm("RegisterUser", "User", FormMethod.Post))
+                                                    {
+                                                        if (@TempData["Error"] != null)
+                                                        {
+                                                            <div style="font-size:large;">
+                                                                @TempData["Error"]
+                                                            </div>
+                                                        }
+                                                        @Html.AntiForgeryToken()
+                                                        @Html.TextBoxFor(user => user.email, "", new { @type = "email", @class = "form-control mb-3", @placeholder = "Email" })
+                                                        @Html.PasswordFor(user => user.password, new { @class = "form-control mb-1", @placeholder = "Password" })                                                        
+                                                        <hr>
+                                                        <div class="fg-actions d-flex justify-content-between">
+                                                            <div class="recover-pass">
+                                                                <input type="submit" id="submit" name="submit" class="btn btn-primary" style="padding:0.375rem 10.75rem;" value="Login" />
+                                                            </div>
                                                         </div>
-                                                        <div class="recover-pass">
-                                                            <a href="#" class="text-decoration-none text-white">
-                                                                <button class="btn btn-primary">
-                                                                    Register
-                                                                </button>
-                                                            </a>
+                                                        <div class="fg-actions d-flex justify-content-between">
+                                                            <div class="login-btn">
+                                                                <a href="/User/UserLogin" class="text-decoration-none">
+                                                                    <button class="btn btn-outline-primary">
+                                                                        Back To Login
+                                                                    </button>
+                                                                </a>
+                                                            </div>
+                                                            <div class="recover-pass">
+                                                                <a href="#" class="text-decoration-none text-white">
+                                                                    <button class="btn btn-primary">
+                                                                        Register
+                                                                    </button>
+                                                                </a>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
