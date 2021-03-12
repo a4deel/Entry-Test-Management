@@ -26,23 +26,20 @@ namespace EntryTestManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AdminLogin(String email,String password)
+        public ActionResult AdminLogin(String email, String password)
         {
-            //if (ModelState.IsValid)
-            //{
-                var foundAdmin = DataStorage.AdminLogins.Where(obj => obj.email.Equals(email) && obj.password.Equals(password)).FirstOrDefault();
-                if(foundAdmin != null)
-                {
-                    Session["AdminEmail"] = foundAdmin.email.ToString();
-                    return RedirectToAction("Dashboard");
-                }
-                else
-                {
-                    TempData["Error"] = "(Incorrect email/password)";
-                    return RedirectToAction("AdminLogin");
-                }
-            //}
-           
+            var foundAdmin = DataStorage.AdminLogins.Where(obj => obj.email.Equals(email) && obj.password.Equals(password)).FirstOrDefault();
+            if (foundAdmin != null)
+            {
+                Session["AdminEmail"] = foundAdmin.email.ToString();
+                return RedirectToAction("Dashboard");
+            }
+            else
+            {
+                TempData["Error"] = "(Incorrect email/password)";
+                return RedirectToAction("AdminLogin");
+            }
+
         }
 
         public ActionResult RegisterUser()
@@ -52,7 +49,7 @@ namespace EntryTestManagement.Controllers
 
         public ActionResult Dashboard()
         {
-            if(Session["AdminEmail"] != null)
+            if (Session["AdminEmail"] != null)
             {
                 return View();
             }
