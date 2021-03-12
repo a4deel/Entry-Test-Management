@@ -9,18 +9,9 @@
 
 namespace EntryTestManagement.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
     public partial class AdminLogin
     {
-        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
-        [Required(ErrorMessage = "Email is required")]
         public string email { get; set; }
-        [Required(ErrorMessage = "Password is required")]
-        [DataType(DataType.Password)]
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$")]
         public string password { get; set; }
     }
 }

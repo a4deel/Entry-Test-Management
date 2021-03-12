@@ -197,7 +197,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -279,10 +281,10 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <None Include="Views\Home\index.cshtml" />
-    <None Include="Views\Home\AdminLogin.cshtml" />
-    <None Include="Views\Home\UserLogin.cshtml" />
-    <None Include="Views\Home\RegisterUser.cshtml" />
-    <None Include="Views\Home\Dashboard.cshtml" />
+    <None Include="Views\Admin\AdminLogin.cshtml" />
+    <None Include="Views\User\UserLogin.cshtml" />
+    <None Include="Views\User\RegisterUser.cshtml" />
+    <None Include="Views\Admin\index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

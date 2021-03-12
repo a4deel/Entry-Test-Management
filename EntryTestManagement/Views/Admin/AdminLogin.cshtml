@@ -24,7 +24,7 @@
                                                     <p class="card-text mb-3">
                                                         Welcome back, please login to your account.
                                                     </p>
-                                                    @using (Html.BeginForm("AdminLogin", "Home", FormMethod.Post))
+                                                    @using (Html.BeginForm("AdminLogin", "Admin", FormMethod.Post))
                                                     {
                                                         if (@TempData["Error"] != null)
                                                         {
@@ -33,7 +33,7 @@
                                                             </div>
                                                         }
                                                         @Html.AntiForgeryToken()
-                                                        @Html.TextBoxFor(admin => admin.email, "", new { @class = "form-control mb-3", @placeholder = "Email" })
+                                                        @Html.TextBoxFor(admin => admin.email, "", new { @type = "email", @class = "form-control mb-3", @placeholder = "Email" })
                                                         @Html.PasswordFor(admin => admin.password, new { @class = "form-control mb-1", @placeholder = "Password" })                                                        <hr>
                                                         <div class="fg-actions d-flex justify-content-between">
                                                             <div class="recover-pass">
