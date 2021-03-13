@@ -41,7 +41,7 @@ namespace EntryTestManagement.Controllers
             }
             else
             {
-                TempData["Error"] = "(Incorrect Email/Password)";
+                TempData["Error"] = "*Incorrect Email/Password";
                 return RedirectToAction("AdminLogin");
             }
         }

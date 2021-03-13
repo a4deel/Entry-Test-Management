@@ -37,36 +37,31 @@
                                                     {
                                                         if (@TempData["Error"] != null)
                                                         {
-                                                            <div style="font-size:large;">
-                                                                @TempData["Error"]
-                                                            </div>
+                                                            <p style="color:red !important;font-size:x-large;">@TempData["Error"]</p>
                                                         }
                                                         @Html.AntiForgeryToken()
                                                         @Html.TextBoxFor(user => user.email, "", new { @type = "email", @class = "form-control mb-3", @placeholder = "Email" })
-                                                        @Html.PasswordFor(user => user.password, new { @class = "form-control mb-1", @placeholder = "Password" })                                                        
+                                                        @Html.PasswordFor(user => user.password, new { @class = "form-control mb-1", @placeholder = "Password" })
                                                         <hr>
                                                         <div class="fg-actions d-flex justify-content-between">
                                                             <div class="recover-pass">
-                                                                <input type="submit" id="submit" name="submit" class="btn btn-primary" style="padding:0.375rem 10.75rem;" value="Login" />
+                                                                <input type="submit" id="submit" name="submit" class="btn btn-primary" style="padding:0.375rem 10.75rem;" value="Register" />
                                                             </div>
                                                         </div>
-                                                        <div class="fg-actions d-flex justify-content-between">
-                                                            <div class="login-btn">
-                                                                <a href="/User/UserLogin" class="text-decoration-none">
-                                                                    <button class="btn btn-outline-primary">
-                                                                        Back To Login
-                                                                    </button>
-                                                                </a>
-                                                            </div>
-                                                            <div class="recover-pass">
-                                                                <a href="#" class="text-decoration-none text-white">
-                                                                    <button class="btn btn-primary">
-                                                                        Register
-                                                                    </button>
-                                                                </a>
-                                                            </div>
-                                                        </div>
+                                                        <hr />
                                                     }
+                                                    <div class="fg-actions d-flex justify-content-between">
+                                                        <div class="login-btn">
+                                                            <a href="/User/UserLogin" class="text-decoration-none btn btn-outline-primary">
+                                                                Back To Login
+                                                            </a>
+                                                        </div>
+                                                        <div class="login-btn">
+                                                            <a href="/Home/Index" class="text-decoration-none btn btn-outline-primary">
+                                                                Back To Home
+                                                            </a>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
