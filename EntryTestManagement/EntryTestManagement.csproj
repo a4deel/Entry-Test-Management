@@ -283,6 +283,9 @@
     <None Include="Views\Home\index.cshtml" />
     <None Include="Views\Admin\AdminLogin.cshtml" />
     <Content Include="Views\User\index.cshtml" />
+    <Content Include="Views\Shared\_DashboardLayout.cshtml" />
+    <Content Include="Views\Shared\_DashboardHead.cshtml" />
+    <Content Include="Views\Shared\_DashboardFooter.cshtml" />
     <None Include="Views\User\UserLogin.cshtml" />
     <None Include="Views\User\RegisterUser.cshtml" />
     <None Include="Views\Admin\index.cshtml" />
