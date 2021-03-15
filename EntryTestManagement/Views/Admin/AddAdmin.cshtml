@@ -1,0 +1,98 @@
+﻿@model EntryTestManagement.Models.AdminData
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="main-panel">
+    <div class="main-content">
+        <div class="content-wrapper">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title" id="basic-layout-colored-form-control">Add Admin</h4>
+                        <p class="mb-0">
+                            (Kindly Fill out the Following Form to add a new Admin. Note: Any admin other than Super Admin will have restricted previliges on System)
+                        </p>
+                    </div>
+                    <div class="card-content">
+                        <div class="px-3">
+                            @using (Html.BeginForm("AddAdmin", "Admin", FormMethod.Post))
+                            {
+                                if (@TempData["Error"] != null)
+                                {
+                                    <p style="color:red !important;font-size:x-large;">@TempData["Error"]</p>
+                                }
+                                @Html.AntiForgeryToken()
+                                <div class="form-body">
+                                    <h3 class="form-section"><i class="ft-info"></i> About Admin</h3>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                @Html.LabelFor(admin => admin.FirstName)
+                                                @Html.TextBoxFor(admin => admin.FirstName, "", new { @class = "form-control border-primary" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                @Html.LabelFor(admin => admin.LastName)
+                                                @Html.TextBoxFor(admin => admin.LastName, "", new { @class = "form-control border-primary" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                @Html.LabelFor(admin => admin.FatherName)
+                                                @Html.TextBoxFor(admin => admin.FatherName, "", new { @class = "form-control border-primary" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                @Html.LabelFor(admin => admin.Gender)
+                                                @Html.TextBoxFor(admin => admin.Gender, "", new { @class = "form-control border-primary" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h4 class="form-section"><i class="ft-mail"></i> Contact Info & Bio</h4>
+                                    <div class="form-group">
+                                        @Html.LabelFor(admin => admin.email)
+                                        @Html.TextBoxFor(admin => admin.email, "", new { @class = "form-control border-primary" })
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(admin => admin.Contact)
+                                        @Html.TextBoxFor(admin => admin.Contact, "", new { @class = "form-control border-primary" })
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(admin => admin.Address)
+                                        @Html.TextAreaFor(admin => admin.Address, new { @class = "form-control border-primary" })
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(admin => admin.Image)
+                                            @Html.TextBoxFor(admin => admin.Image, "", new { type = "file", @class = "form-control border-primary" })
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-actions right">
+                                        <button type="reset" class="btn btn-raised btn-warning mr-1">
+                                            <i class="ft-x"></i> Cancel
+                                        </button>
+                                        @*<div>
+                                            <i class="fa fa-check-square-o"></i>
+                                            <input type="submit" id="submit" name="submit" class="btn btn-raised btn-primary" value="Add Admin" />
+                                        </div>*@
+                                        <button type="submit" class="btn btn-raised btn-primary">
+                                            <i class="fa fa-check-square-o"></i> Save
+                                        </button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END : End Main Content-->
+    </div>
+</div>

@@ -33,19 +33,25 @@ namespace EntryTestManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UserLogin(String email, String password)
+        public ActionResult UserLogin(UserLogin user)
         {
-            password = GetMD5(password);
-            var foundUser = DataStorage.UserLogins.Where(obj => obj.email.Equals(email) && obj.password.Equals(password)).FirstOrDefault();
-            if (foundUser != null)
+            if (ModelState.IsValid)
             {
-                Session["UserEmail"] = foundUser.email.ToString();
-                return RedirectToAction("Index");
+                var foundUser = DataStorage.AdminLogins.Where(obj => obj.email.Equals(user.email) && obj.password.Equals(user.password)).FirstOrDefault();
+                if (foundUser != null)
+                {
+                    Session["UserEmail"] = foundUser.email.ToString();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["Error"] = "*Incorrect Email/Password";
+                    return RedirectToAction("UserLogin");
+                }
             }
             else
             {
-                TempData["Error"] = "*Incorrect Email/Password";
-                return RedirectToAction("UserLogin");
+                return View(user);
             }
         }
 
@@ -64,18 +70,26 @@ namespace EntryTestManagement.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RegisterUser(UserLogin user)
         {
-            var foundUser = DataStorage.UserLogins.Where(obj => obj.email.Equals(user.email)).FirstOrDefault();
-            if (foundUser == null)
+            if (ModelState.IsValid)
             {
-                user.password = GetMD5(user.password);
-                DataStorage.UserLogins.Add(user);
-                DataStorage.SaveChanges();
-                return RedirectToAction("UserLogin");
+                var foundUser = DataStorage.UserLogins.Where(obj => obj.email.Equals(user.email)).FirstOrDefault();
+                if (foundUser == null)
+                {
+                    //user.password = GetMD5(user.password);
+                    DataStorage.Configuration.ValidateOnSaveEnabled = false;
+                    DataStorage.UserLogins.Add(user);
+                    DataStorage.SaveChanges();
+                    return RedirectToAction("UserLogin");
+                }
+                else
+                {
+                    TempData["Error"] = "*Email already exists";
+                    return RedirectToAction("RegisterUser");
+                }
             }
             else
             {
-                TempData["Error"] = "*Email already exists";
-                return RedirectToAction("RegisterUser");
+                return View(user);
             }
         }
 

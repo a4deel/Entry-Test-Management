@@ -1,12 +1,4 @@
-﻿
-<script>
-
-    if (performance.navigation.type == 2) {
-        location.reload();
-    }
-
-</script>
-@model EntryTestManagement.Models.AdminLogin
+﻿@model EntryTestManagement.Models.AdminLogin
 @{
     var styleURL = "/Content/styles";
 }
@@ -35,13 +27,17 @@
                                                     </p>
                                                     @using (Html.BeginForm("AdminLogin", "Admin", FormMethod.Post))
                                                     {
+                                                        @Html.ValidationSummary(true)
                                                         if (@TempData["Error"] != null)
                                                         {
-                                                            <p style="color:red !important;font-size:x-large;">@TempData["Error"]</p>
+                                                            <p style="font-size:x-large;" class="badge badge-danger">@TempData["Error"]</p>
                                                         }
                                                         @Html.AntiForgeryToken()
-                                                        @Html.TextBoxFor(admin => admin.email, "", new { @type = "email", @class = "form-control mb-3", @placeholder = "Email" })
-                                                        @Html.PasswordFor(admin => admin.password, new { @class = "form-control mb-1", @placeholder = "Password" })                                                        <hr>
+                                                        @Html.TextBoxFor(admin => admin.email, "Email", new { @class = "form-control mb-3", @placeholder = "Email" })
+                                                        @Html.ValidationMessageFor(admin => admin.email, "", new { @class = "badge badge-danger" })
+                                                        @Html.PasswordFor(admin => admin.password, new { @class = "form-control mb-1", @placeholder = "Password" })
+                                                        @Html.ValidationMessageFor(admin => admin.password, "", new { @class = "badge badge-danger" })
+                                                        <hr>
                                                         <div class="fg-actions d-flex justify-content-between">
                                                             <div class="recover-pass">
                                                                 <input type="submit" id="submit" name="submit" class="btn btn-primary" style="padding:0.375rem 10.75rem;" value="Login" />
@@ -71,3 +67,8 @@
         <!-- END : End Main Content-->
     </div>
 </div>
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>

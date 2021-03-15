@@ -282,10 +282,12 @@
     <Content Include="Scripts\_references.js" />
     <None Include="Views\Home\index.cshtml" />
     <None Include="Views\Admin\AdminLogin.cshtml" />
+    <None Include="Views\Admin\AddAdmin.cshtml" />
     <Content Include="Views\User\index.cshtml" />
-    <Content Include="Views\Shared\_DashboardLayout.cshtml" />
-    <Content Include="Views\Shared\_DashboardHead.cshtml" />
-    <Content Include="Views\Shared\_DashboardFooter.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Shared\_Head.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
     <None Include="Views\User\UserLogin.cshtml" />
     <None Include="Views\User\RegisterUser.cshtml" />
     <None Include="Views\Admin\index.cshtml" />
@@ -298,7 +300,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Shared\_LoginHead.cshtml" />
     <Content Include="Views\Shared\_LoginFooter.cshtml" />
   </ItemGroup>

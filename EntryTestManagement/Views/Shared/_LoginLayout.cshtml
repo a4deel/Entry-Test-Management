@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="loading">
+<!-- BEGIN : Head-->
+
+<head>
+    @Html.Partial("_LoginHead")
+</head>
+<script>
+
+    if (performance.navigation.type == 2) {
+        location.reload();
+    }
+</script>
+<body data-col="1-column" class="1-column layout-dark layout-transparent bg-glass-1 blank-page">
+    @RenderBody()
+    @Html.Partial("_LoginFooter")
+    </body>
+</html>
