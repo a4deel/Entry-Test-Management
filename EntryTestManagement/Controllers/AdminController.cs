@@ -56,25 +56,6 @@ namespace EntryTestManagement.Controllers
             }
         }
 
-        public ActionResult AddAdmin()
-        {
-            if (Session["AdminEmail"] != null)
-            {
-                return View();
-            }
-            else
-            {
-                return RedirectToAction("AdminLogin");
-            }
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddAdmin(String a)
-        {
-            return RedirectToAction("Index");
-        }
-
         public ActionResult Logout()
         {
             Session.Clear();

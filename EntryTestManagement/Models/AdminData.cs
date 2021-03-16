@@ -11,16 +11,33 @@ namespace EntryTestManagement.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class AdminData
     {
+        [Required(ErrorMessage = "Email is Required")]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Email format is Invalid")]
         public string email { get; set; }
+
+        [Required(ErrorMessage = "First Name is Required")]
         public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Last Name is Required")]
         public string LastName { get; set; }
-        public string Contact { get; set; }
-        public string Image { get; set; }
-        public string Gender { get; set; }
-        public string Address { get; set; }
+
+        [Required(ErrorMessage = "Father Name is Required")]
         public string FatherName { get; set; }
+
+        [Required(ErrorMessage = "Contact is Required")]
+        [RegularExpression(@"^((\+92)|(0092))-{0,1}\d{3}-{0,1}\d{7}$|^\d{11}$|^\d{4}-\d{7}$",ErrorMessage ="+92/03xxxxxxxxx is Correct Format")]
+        public string Contact { get; set; }
+
+        public string Image { get; set; }
+
+        [Required(ErrorMessage = "Gender is Required")]
+        public String Gender { get; set; }
+
+        [Required(ErrorMessage = "Address is Required")]
+        public string Address { get; set; }
     }
 }

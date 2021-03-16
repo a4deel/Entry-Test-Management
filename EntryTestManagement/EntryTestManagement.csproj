@@ -282,7 +282,6 @@
     <Content Include="Scripts\_references.js" />
     <None Include="Views\Home\index.cshtml" />
     <None Include="Views\Admin\AdminLogin.cshtml" />
-    <None Include="Views\Admin\AddAdmin.cshtml" />
     <Content Include="Views\User\index.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Shared\_Head.cshtml" />
