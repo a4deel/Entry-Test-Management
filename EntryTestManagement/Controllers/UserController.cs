@@ -37,7 +37,8 @@ namespace EntryTestManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                var foundUser = DataStorage.AdminLogins.Where(obj => obj.email.Equals(user.email) && obj.password.Equals(user.password)).FirstOrDefault();
+                user.password = GetMD5(user.password);
+                var foundUser = DataStorage.UserLogins.Where(obj => obj.email.Equals(user.email) && obj.password.Equals(user.password)).FirstOrDefault();
                 if (foundUser != null)
                 {
                     Session["UserEmail"] = foundUser.email.ToString();
@@ -75,7 +76,7 @@ namespace EntryTestManagement.Controllers
                 var foundUser = DataStorage.UserLogins.Where(obj => obj.email.Equals(user.email)).FirstOrDefault();
                 if (foundUser == null)
                 {
-                    //user.password = GetMD5(user.password);
+                    user.password = GetMD5(user.password);
                     DataStorage.Configuration.ValidateOnSaveEnabled = false;
                     DataStorage.UserLogins.Add(user);
                     DataStorage.SaveChanges();

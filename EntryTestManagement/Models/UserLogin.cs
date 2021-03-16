@@ -26,9 +26,9 @@ namespace EntryTestManagement.Models
         [Required(ErrorMessage = "Password is Required")]
         public string password { get; set; }
 
-        [NotMapped]
-        [Required(ErrorMessage ="Confirm Password is Required")]
-        [Compare("password")]
-        public string ConfirmPassword { get; set; }
+        //[NotMapped]
+        //[Required(ErrorMessage ="Confirm Password is Required")]
+        //[Compare("password")]
+        //public string ConfirmPassword { get; set; }
     }
 }
