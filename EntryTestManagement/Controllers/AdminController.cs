@@ -37,7 +37,6 @@ namespace EntryTestManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                admin.password = GetMD5(admin.password);
                 var foundAdmin = DataStorage.AdminLogins.Where(obj => obj.email.Equals(admin.email) && obj.password.Equals(admin.password)).FirstOrDefault();
                 if (foundAdmin != null)
                 {
@@ -60,6 +59,38 @@ namespace EntryTestManagement.Controllers
         {
             Session.Clear();
             return RedirectToAction("AdminLogin");
+        }
+
+        public ActionResult ViewAdmins()
+        {
+            if (Session["AdminEmail"] != null)
+            {
+                var admins = DataStorage.AdminDatas.ToList();
+                return View(admins);
+            }
+            else
+            {
+                return RedirectToAction("AdminLogin");
+            }
+        }
+
+        public ActionResult AdminProfile(String email)
+        {
+            if (Session["AdminEmail"] != null)
+            {
+                if (email != "")
+                {
+                    return View(DataStorage.AdminDatas.Where(obj => obj.email.Equals(email)));
+                }
+                else
+                {
+                    return RedirectToAction("ViewAdmins");
+                }
+            }
+            else
+            {
+                return RedirectToAction("AdminLogin");
+            }
         }
 
         private string GetMD5(string str)

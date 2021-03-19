@@ -167,7 +167,6 @@ sup {
 }
 
 a {
-  color: #009DA0;
   text-decoration: none;
   background-color: transparent;
 }
@@ -43013,7 +43012,7 @@ h6,
 }
 
 a {
-  color: #009DA0;
+  color: blue;
 }
 
 a:hover,

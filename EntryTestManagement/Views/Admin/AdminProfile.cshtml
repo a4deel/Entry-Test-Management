@@ -1,0 +1,116 @@
+﻿@model EntryTestManagement.Models.AdminData
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@{
+    var @styleURL = "/Content/styles";
+    var @image = "";
+}
+
+    <div class="main-panel">
+        <!-- BEGIN : Main Content-->
+        <div class="main-content">
+            <div class="content-wrapper">
+                <!--User Profile Starts-->
+                <!--Basic User Details Starts-->
+                <section id="user-profile">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card profile-with-cover">
+                                <div class="card-img-top img-fluid bg-cover height-300" style="background: url('@styleURL/img/gallery/back.jpg') 50%;"></div>
+                                <div class="media profil-cover-details row">
+                                    <div class="col-5">
+                                        <div class="align-self-start halfway-fab pl-3 pt-2">
+                                            <div class="text-left">
+                                                <h1 class="card-title white">
+                                                    @Html.DisplayNameFor(admin => admin.FirstName)
+                                                    @Html.DisplayNameFor(admin => admin.LastName)
+                                                </h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="align-self-center halfway-fab text-center">
+                                            <a class="profile-image">
+                                               @{image = @styleURL + "/" + @Html.DisplayNameFor(admin => admin.Image) + ".png"; }
+                                                <img src="@image" class="rounded-circle img-border gradient-summer width-200"
+                                                     alt="Card image">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="about">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="content-header">About</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Personal Information</h5>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12 col-md-6 col-lg-4">
+                                                <ul class="no-list-style">
+                                                    <li class="mb-2">
+                                                        <span class="text-bold-500 primary"><a><i class="fa fa-address-card font-small-3"></i> First Name:</a></span>
+                                                        <span class="d-block overflow-hidden">@Html.DisplayNameFor(admin => admin.FirstName)</span>
+                                                    </li>
+                                                    <li class="mb-2">
+                                                        <span class="text-bold-500 primary"><a><i class="fa fa-address-card font-small-3"></i> Last Name:</a></span>
+                                                        <span class="d-block overflow-hidden">@Html.DisplayNameFor(admin => admin.LastName)</span>
+                                                    </li>
+                                                    <li class="mb-2">
+                                                        <span class="text-bold-500 primary"><a><i class="fa fa-address-card font-small-3"></i> CNIC:</a></span>
+                                                        <span class="d-block overflow-hidden">@Html.DisplayNameFor(admin => admin.CNIC)</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-12 col-md-6 col-lg-4">
+                                                <ul class="no-list-style">
+                                                    <li class="mb-2">
+                                                        <span class="text-bold-500 primary"><a><i class="ft-user font-small-3"></i> Gender:</a></span>
+                                                        <span class="d-block overflow-hidden">@Html.DisplayNameFor(admin => admin.Gender)</span>
+                                                    </li>
+                                                    <li class="mb-2">
+                                                        <span class="text-bold-500 primary"><a><i class="ft-mail font-small-3"></i> Email:</a></span>
+                                                        <a class="d-block overflow-hidden">@Html.DisplayNameFor(admin => admin.email)</a>
+                                                    </li>
+                                                    <li class="mb-2">
+                                                        <span class="text-bold-500 primary"><a><i class="ft-smartphone font-small-3"></i> Phone Number:</a></span>
+                                                        <span class="d-block overflow-hidden">@Html.DisplayNameFor(admin => admin.Contact)</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-12 col-md-6 col-lg-4">
+                                                <ul class="no-list-style">
+                                                    <li class="mb-2">
+                                                        <span class="text-bold-500 primary"><a><i class="ft-globe font-small-3"></i> Address:</a></span>
+                                                        <span class="d-block overflow-hidden">@Html.DisplayNameFor(admin => admin.Address)</span>
+                                                    </li>
+                                                    <li class="mb-2">
+                                                        <span class="text-bold-500 primary"><a><i class="ft-briefcase font-small-3"></i> Role:</a></span>
+                                                        <span class="d-block overflow-hidden">System Admin</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+}
