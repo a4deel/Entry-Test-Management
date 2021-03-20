@@ -18,6 +18,7 @@
           <Property Name="Image" Type="nvarchar" MaxLength="50" />
           <Property Name="Gender" Type="nvarchar" MaxLength="50" />
           <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="AdminLogin">
           <Key>
@@ -56,12 +57,13 @@
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contact" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CNIC" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="AdminLogin">
           <Key>
@@ -88,6 +90,7 @@
           <EntitySetMapping Name="AdminDatas">
             <EntityTypeMapping TypeName="EntryTestDetailsDBModel1.AdminData">
               <MappingFragment StoreEntitySet="AdminData">
+                <ScalarProperty Name="Role" ColumnName="Role" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="CNIC" ColumnName="CNIC" />
                 <ScalarProperty Name="Address" ColumnName="Address" />

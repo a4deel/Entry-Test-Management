@@ -15,6 +15,7 @@ namespace EntryTestManagement.Models
 
     public partial class UserLogin
     {
+
         [Required(ErrorMessage = "Email is Required")]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Invalid Email Format")]
         public string email { get; set; }
@@ -22,7 +23,6 @@ namespace EntryTestManagement.Models
         [Required(ErrorMessage = "Password is Required")]
         [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", ErrorMessage = "Password Req : Min. Length 8, 1 Letter and Number")]
         public string password { get; set; }
-
         public int id { get; set; }
     }
 }

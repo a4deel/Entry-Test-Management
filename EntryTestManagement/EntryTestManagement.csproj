@@ -281,6 +281,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Admin\AdminProfile.cshtml" />
+    <Content Include="Views\Admin\AddAdmin.cshtml" />
     <None Include="Views\Home\index.cshtml" />
     <None Include="Views\Admin\AdminLogin.cshtml" />
     <None Include="Views\Admin\ViewAdmins.cshtml" />
@@ -318,6 +319,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\styles\" />
+    <Folder Include="Scripts\img\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

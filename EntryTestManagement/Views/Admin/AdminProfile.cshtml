@@ -33,7 +33,7 @@
                                     <div class="col-2">
                                         <div class="align-self-center halfway-fab text-center">
                                             <a class="profile-image">
-                                                @{image = @styleURL + "/img/admins/" + @Model.Image + ".png"; }
+                                                @{image = @styleURL + "/img/admins/" + @Model.Image; }
                                                 <img src="@image" class="rounded-circle img-border gradient-summer width-200"
                                                      alt="Card image">
                                             </a>
@@ -103,7 +103,7 @@
                                                     </li>
                                                     <li class="mb-2">
                                                         <span class="text-bold-500 primary"><a><i class="ft-briefcase font-small-3"></i> Role:</a></span>
-                                                        <span class="d-block overflow-hidden">System Admin</span>
+                                                        <span class="d-block overflow-hidden">System @Model.Role Admin</span>
                                                     </li>
                                                 </ul>
                                             </div>
