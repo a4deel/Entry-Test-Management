@@ -22,5 +22,7 @@ namespace EntryTestManagement.Models
         [Required(ErrorMessage = "Password is Required")]
         [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", ErrorMessage = "Password Req : Min. Length 8, 1 Letter and Number")]
         public string password { get; set; }
+
+        public int id { get; set; }
     }
 }

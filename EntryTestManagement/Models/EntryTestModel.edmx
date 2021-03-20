@@ -7,9 +7,10 @@
     <Schema Namespace="EntryTestDetailsDBModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AdminData">
           <Key>
-            <PropertyRef Name="email" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" />
           <Property Name="CNIC" Type="numeric" Precision="18" Scale="0" />
@@ -20,8 +21,9 @@
         </EntityType>
         <EntityType Name="AdminLogin">
           <Key>
-            <PropertyRef Name="email" />
+            <PropertyRef Name="id" />
           </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -49,9 +51,9 @@
         </EntityContainer>
         <EntityType Name="AdminData">
           <Key>
-            <PropertyRef Name="email" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -59,13 +61,15 @@
           <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CNIC" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="AdminLogin">
           <Key>
-            <PropertyRef Name="email" />
+            <PropertyRef Name="id" />
           </Key>
           <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="UserLogin">
           <Key>
@@ -84,6 +88,7 @@
           <EntitySetMapping Name="AdminDatas">
             <EntityTypeMapping TypeName="EntryTestDetailsDBModel1.AdminData">
               <MappingFragment StoreEntitySet="AdminData">
+                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="CNIC" ColumnName="CNIC" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
@@ -98,6 +103,7 @@
           <EntitySetMapping Name="AdminLogins">
             <EntityTypeMapping TypeName="EntryTestDetailsDBModel1.AdminLogin">
               <MappingFragment StoreEntitySet="AdminLogin">
+                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="email" ColumnName="email" />
               </MappingFragment>

@@ -31,7 +31,7 @@ namespace EntryTestManagement.Controllers
             return View();
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AdminLogin(AdminLogin admin)
         {
@@ -40,6 +40,7 @@ namespace EntryTestManagement.Controllers
                 var foundAdmin = DataStorage.AdminLogins.Where(obj => obj.email.Equals(admin.email) && obj.password.Equals(admin.password)).FirstOrDefault();
                 if (foundAdmin != null)
                 {
+                    Session["AdminID"] = foundAdmin.id.ToString();
                     Session["AdminEmail"] = foundAdmin.email.ToString();
                     return RedirectToAction("Index");
                 }
@@ -74,13 +75,22 @@ namespace EntryTestManagement.Controllers
             }
         }
 
-        public ActionResult AdminProfile(String email)
+        [HttpGet]
+        public ActionResult AdminProfile(int? id)
         {
             if (Session["AdminEmail"] != null)
             {
-                if (email != "")
+                if (id != null)
                 {
-                    return View(DataStorage.AdminDatas.Where(obj => obj.email.Equals(email)));
+                    var admin = DataStorage.AdminDatas.Find(id);
+                    if(admin != null)
+                    {
+                        return View(admin);
+                    }
+                    else
+                    {
+                        return RedirectToAction("ViewAdmins");
+                    }
                 }
                 else
                 {

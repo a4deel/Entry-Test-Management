@@ -22,5 +22,6 @@ namespace EntryTestManagement.Models
         public string Gender { get; set; }
         public string Address { get; set; }
         public Nullable<decimal> CNIC { get; set; }
+        public int id { get; set; }
     }
 }

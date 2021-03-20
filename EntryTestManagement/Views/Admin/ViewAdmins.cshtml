@@ -16,11 +16,16 @@
                             <div class="card-header">
                                 <h4 class="card-title">View Admins</h4>
                             </div>
+                            @if (@TempData["Error"] != null)
+                            {
+                                <p style="font-size:x-large;" class="badge badge-danger">@TempData["Error"]</p>
+                            }
                             <div class="card-content ">
                                 <div class="card-body card-dashboard table-responsive">
                                     <table class="table table-striped table-bordered column-rendering">
                                         <thead>
                                             <tr>
+                                                <th>ID</th>
                                                 <th>Image</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
@@ -42,18 +47,20 @@
                                                     image = @styleURL + "/user.png";
                                                 }
                                                 var FullName = @admin.FirstName + " " + @admin.LastName;
-                                            <tr>
-                                                <td><img src="@image" height="100" width="100" style="border-radius: 50%;color:white;"></td>
-                                                <td><a href="@Url.Action("AdminProfile","Admin",new { adminEmail = admin.email})">@FullName</a></td>
-                                                <td>@admin.email</td>
-                                                <td>@admin.CNIC</td>
-                                                <td>@admin.Contact</td>
-                                                <td>@admin.Address</td>
-                                            </tr>
+                                                <tr>
+                                                    <td>@admin.id</td>
+                                                    <td><img src="@image" height="100" width="100" style="border-radius: 50%;color:white;"></td>
+                                                    <td><a href="@Url.Action("AdminProfile","Admin",new {@admin.id})">@FullName</a></td>
+                                                    <td>@admin.email</td>
+                                                    <td>@admin.CNIC</td>
+                                                    <td>@admin.Contact</td>
+                                                    <td>@admin.Address</td>
+                                                </tr>
                                             }
                                         </tbody>
                                         <tfoot>
                                             <tr>
+                                                <th>ID</th>
                                                 <th>Image</th>
                                                 <th>Name</th>
                                                 <th>Email</th>

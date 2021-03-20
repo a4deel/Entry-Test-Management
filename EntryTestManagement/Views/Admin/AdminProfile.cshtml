@@ -6,7 +6,8 @@
     var @styleURL = "/Content/styles";
     var @image = "";
 }
-
+@if (@Model != null)
+{
     <div class="main-panel">
         <!-- BEGIN : Main Content-->
         <div class="main-content">
@@ -23,8 +24,8 @@
                                         <div class="align-self-start halfway-fab pl-3 pt-2">
                                             <div class="text-left">
                                                 <h1 class="card-title white">
-                                                    @Html.DisplayNameFor(admin => admin.FirstName)
-                                                    @Html.DisplayNameFor(admin => admin.LastName)
+                                                    @Model.FirstName
+                                                    @Model.LastName
                                                 </h1>
                                             </div>
                                         </div>
@@ -32,7 +33,7 @@
                                     <div class="col-2">
                                         <div class="align-self-center halfway-fab text-center">
                                             <a class="profile-image">
-                                               @{image = @styleURL + "/" + @Html.DisplayNameFor(admin => admin.Image) + ".png"; }
+                                                @{image = @styleURL + "/img/admins/" + @Model.Image + ".png"; }
                                                 <img src="@image" class="rounded-circle img-border gradient-summer width-200"
                                                      alt="Card image">
                                             </a>
@@ -61,16 +62,16 @@
                                             <div class="col-12 col-md-6 col-lg-4">
                                                 <ul class="no-list-style">
                                                     <li class="mb-2">
+                                                        <span class="text-bold-500 primary"><a><i class="fa fa-address-card font-small-3"></i> Admin ID:</a></span>
+                                                        <span class="d-block overflow-hidden">@Model.id</span>
+                                                    </li>
+                                                    <li class="mb-2">
                                                         <span class="text-bold-500 primary"><a><i class="fa fa-address-card font-small-3"></i> First Name:</a></span>
-                                                        <span class="d-block overflow-hidden">@Html.DisplayNameFor(admin => admin.FirstName)</span>
+                                                        <span class="d-block overflow-hidden">@Model.FirstName</span>
                                                     </li>
                                                     <li class="mb-2">
                                                         <span class="text-bold-500 primary"><a><i class="fa fa-address-card font-small-3"></i> Last Name:</a></span>
-                                                        <span class="d-block overflow-hidden">@Html.DisplayNameFor(admin => admin.LastName)</span>
-                                                    </li>
-                                                    <li class="mb-2">
-                                                        <span class="text-bold-500 primary"><a><i class="fa fa-address-card font-small-3"></i> CNIC:</a></span>
-                                                        <span class="d-block overflow-hidden">@Html.DisplayNameFor(admin => admin.CNIC)</span>
+                                                        <span class="d-block overflow-hidden">@Model.LastName</span>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -78,23 +79,27 @@
                                                 <ul class="no-list-style">
                                                     <li class="mb-2">
                                                         <span class="text-bold-500 primary"><a><i class="ft-user font-small-3"></i> Gender:</a></span>
-                                                        <span class="d-block overflow-hidden">@Html.DisplayNameFor(admin => admin.Gender)</span>
+                                                        <span class="d-block overflow-hidden">@Model.Gender</span>
                                                     </li>
                                                     <li class="mb-2">
                                                         <span class="text-bold-500 primary"><a><i class="ft-mail font-small-3"></i> Email:</a></span>
-                                                        <a class="d-block overflow-hidden">@Html.DisplayNameFor(admin => admin.email)</a>
+                                                        <a class="d-block overflow-hidden">@Model.email</a>
                                                     </li>
                                                     <li class="mb-2">
-                                                        <span class="text-bold-500 primary"><a><i class="ft-smartphone font-small-3"></i> Phone Number:</a></span>
-                                                        <span class="d-block overflow-hidden">@Html.DisplayNameFor(admin => admin.Contact)</span>
+                                                        <span class="text-bold-500 primary"><a><i class="fa fa-address-card font-small-3"></i> CNIC:</a></span>
+                                                        <span class="d-block overflow-hidden">@Model.CNIC</span>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-4">
                                                 <ul class="no-list-style">
                                                     <li class="mb-2">
+                                                        <span class="text-bold-500 primary"><a><i class="ft-smartphone font-small-3"></i> Phone Number:</a></span>
+                                                        <span class="d-block overflow-hidden">@Model.Contact</span>
+                                                    </li>
+                                                    <li class="mb-2">
                                                         <span class="text-bold-500 primary"><a><i class="ft-globe font-small-3"></i> Address:</a></span>
-                                                        <span class="d-block overflow-hidden">@Html.DisplayNameFor(admin => admin.Address)</span>
+                                                        <span class="d-block overflow-hidden">@Model.Address</span>
                                                     </li>
                                                     <li class="mb-2">
                                                         <span class="text-bold-500 primary"><a><i class="ft-briefcase font-small-3"></i> Role:</a></span>
