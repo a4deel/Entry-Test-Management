@@ -28,8 +28,14 @@ namespace EntryTestManagement.Controllers
 
         public ActionResult AdminLogin()
         {
-            Session.Clear();
-            return View();
+            if (Session["AdminEmail"] != null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         [HttpPost]

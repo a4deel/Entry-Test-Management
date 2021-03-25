@@ -27,8 +27,14 @@ namespace EntryTestManagement.Controllers
 
         public ActionResult UserLogin()
         {
-            Session.Clear();
-            return View();
+            if (Session["UserEmail"] != null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         [HttpPost]
