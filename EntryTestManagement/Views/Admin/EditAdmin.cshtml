@@ -1,0 +1,108 @@
+﻿@model EntryTestManagement.Models.AdminData
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="main-panel">
+    <!-- BEGIN : Main Content-->
+    <div class="main-content">
+        <div class="content-wrapper">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title" id="basic-layout-colored-form-control">Edit Admin</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="px-3">
+                            @using (@Html.BeginForm("EditAdmin", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                @Html.ValidationSummary(true)
+                                if (@TempData["Error"] != null)
+                                {
+                                    <p style="color:red !important;font-size:x-large;">@TempData["Error"]</p>
+                                }
+                                @Html.AntiForgeryToken()
+                                <div class="form-body">
+                                    <h4 class="form-section"><i class="ft-info"></i> About Admin</h4>
+                                    @Html.HiddenFor(model => model.id)
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="userinput1">First Name</label>
+                                                @Html.TextBoxFor(admin => admin.FirstName, "", new { @class = "form-control mb-1" })
+                                                @Html.ValidationMessageFor(admin => admin.FirstName, "", new { @class = "badge badge-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="userinput2">Last Name</label>
+                                                @Html.TextBoxFor(admin => admin.LastName, "", new { @class = "form-control mb-1" })
+                                                @Html.ValidationMessageFor(admin => admin.LastName, "", new { @class = "badge badge-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="userinput4">Gender</label>
+                                                @Html.TextBoxFor(admin => admin.Gender, "", new { @class = "form-control mb-1" })
+                                                @Html.ValidationMessageFor(admin => admin.Gender, "", new { @class = "badge badge-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="userinput2">Profile Image</label>
+                                                @Html.TextBoxFor(admin => admin.ImageFile, "", new { @type = "file", @class = "form-control mb-1" })
+                                                @Html.ValidationMessageFor(admin => admin.ImageFile, "", new { @class = "badge badge-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="form-section"><i class="ft-mail"></i> Contact Info & Bio</h4>
+
+                                    <div class="form-group">
+                                        <label for="userinput5">Email</label>
+                                        @Html.TextBoxFor(admin => admin.email, "", new { @readonly = "readonly", @class = "form-control mb-1" })
+                                        @Html.ValidationMessageFor(admin => admin.email, "", new { @class = "badge badge-danger" })
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="userinput3">CNIC</label>
+                                        @Html.TextBoxFor(admin => admin.CNIC, "", new { @class = "form-control mb-1" })
+                                        @Html.ValidationMessageFor(admin => admin.CNIC, "", new { @class = "badge badge-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="userinput5">Contact Number</label>
+                                        @Html.TextBoxFor(admin => admin.Contact, "", new { @class = "form-control mb-1" })
+                                        @Html.ValidationMessageFor(admin => admin.Contact, "", new { @class = "badge badge-danger" })
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="userinput5">Address</label>
+                                        @Html.TextBoxFor(admin => admin.Address, "", new { @class = "form-control mb-1" })
+                                        @Html.ValidationMessageFor(admin => admin.Address, "", new { @class = "badge badge-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-actions right">
+                                    <button type="reset" class="btn btn-raised btn-warning mr-1">
+                                        <i class="ft-x"></i> Reset
+                                    </button>
+                                </div>
+                                <div class="recover-pass">
+                                    <input type="submit" id="submit" name="submit" class="btn btn-raised btn-primary mr-1" value="Add Admin">
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END : End Main Content-->
+</div>
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>

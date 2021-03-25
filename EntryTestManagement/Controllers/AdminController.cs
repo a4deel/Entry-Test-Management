@@ -1,8 +1,11 @@
 ﻿using EntryTestManagement.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
@@ -90,35 +93,37 @@ namespace EntryTestManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                string FileName = "";
-                string FileExtension = "";
+                string name = "";
                 string UploadPath = "";
                 var foundAdmin = DataStorage.AdminDatas.Where(obj => obj.email.Equals(admin.email)).FirstOrDefault();
                 if (foundAdmin == null)
                 {
+                    string fullName = admin.FirstName + " " + admin.LastName;
                     DataStorage.Configuration.ValidateOnSaveEnabled = false;
                     admin.Role = "Sub";
-                    if(admin.ImageFile != null)
+                    if (admin.ImageFile != null)
                     {
-                        FileName = Path.GetFileName(admin.ImageFile.FileName);
-                        FileExtension = Path.GetExtension(admin.ImageFile.FileName);
-                        FileName = "(" + admin.FirstName + ")" + FileName;
-                        UploadPath = Server.MapPath("~\\Content\\styles\\img\\admins\\"+ FileName);
-                        admin.Image = FileName;
+                        name = Path.GetFileName(admin.ImageFile.FileName);
+                        UploadPath = Server.MapPath("~\\Content\\styles\\img\\admins\\" + name);
+                        admin.Image = name;
                     }
                     else
                     {
-                        admin.Image = "user";
+                        admin.Image = "user.png";
                     }
+                    string pass = RandomPassword();
                     AdminLogin obj = new AdminLogin
                     {
                         email = admin.email,
-                        password = admin.FirstName + "1234"
+                        password = pass
                     };
                     DataStorage.AdminLogins.Add(obj);
                     DataStorage.AdminDatas.Add(admin);
                     DataStorage.SaveChanges();
                     admin.ImageFile.SaveAs(UploadPath);
+                    string subject = "Admin Password Reset Invitation";
+                    var message = "Your dummy password is generated kindly reset this password and update it. Your password is "+pass;
+                    sendEmail(admin.email,subject,message,fullName);
                     TempData["Error"] = "New Sub Admin Added Successfully";
                     return RedirectToAction("AddAdmin");
                 }
@@ -154,7 +159,7 @@ namespace EntryTestManagement.Controllers
                 if (id != null)
                 {
                     var admin = DataStorage.AdminDatas.Find(id);
-                    if(admin != null)
+                    if (admin != null)
                     {
                         return View(admin);
                     }
@@ -181,7 +186,7 @@ namespace EntryTestManagement.Controllers
             {
                 AdminData adminData = DataStorage.AdminDatas.Find(id);
                 AdminLogin adminLogin = DataStorage.AdminLogins.Find(id);
-                if(adminData != null && adminLogin != null)
+                if (adminData != null && adminLogin != null)
                 {
                     DataStorage.AdminDatas.Remove(adminData);
                     DataStorage.AdminLogins.Remove(adminLogin);
@@ -190,13 +195,66 @@ namespace EntryTestManagement.Controllers
                 }
                 else
                 {
-                    TempData["Error"] = "Only Super Admin can delete/Admin Deletion ID is Null";
+                    TempData["Error"] = "Admin Not Found";
                     return RedirectToAction("ViewAdmins");
                 }
             }
             else
             {
+                TempData["Error"] = "Null ID is given/Only Super Admin Can Perform This Operation";
                 return RedirectToAction("ViewAdmins");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult EditAdmin(int? id)
+        {
+            if (id != null && Session["AdminRole"].Equals("Super"))
+            {
+                AdminData adminData = DataStorage.AdminDatas.Find(id);
+                if (adminData != null)
+                {
+                    return View(adminData);
+                }
+                else
+                {
+                    TempData["Error"] = "Admin Not Found";
+                    return RedirectToAction("ViewAdmins");
+                }
+            }
+            else
+            {
+                TempData["Error"] = "Null ID is given/Only Super Admin Can Perform This Operation";
+                return RedirectToAction("ViewAdmins");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditAdmin(AdminData admin)
+        {
+            if (ModelState.IsValid)
+            {
+                string name = "";
+                string UploadPath = "";
+                if (admin.ImageFile != null)
+                {
+                    name = Path.GetFileName(admin.ImageFile.FileName);
+                    UploadPath = Server.MapPath("~\\Content\\styles\\img\\admins\\" + name);
+                    admin.Image = name;
+                }
+                else
+                {
+                    admin.Image = "user.png";
+                }
+                admin.Role = "Sub";
+                DataStorage.Entry(admin).State = EntityState.Modified;
+                DataStorage.SaveChanges();
+                admin.ImageFile.SaveAs(UploadPath);
+                return RedirectToAction("ViewAdmins");
+            }
+            else
+            {
+                return View(admin);
             }
         }
 
@@ -213,6 +271,46 @@ namespace EntryTestManagement.Controllers
 
             }
             return byte2String;
+        }
+
+        private string RandomPassword()
+        {
+            string validChars = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*?_-";
+            Random random = new Random();
+            int size = random.Next(8, validChars.Length);
+            char[] chars = new char[size];
+            for (int i = 0; i < size; i++)
+            {
+                chars[i] = validChars[random.Next(0, validChars.Length)];
+            }
+            return new string(chars);
+        }
+
+        private void sendEmail(string receiver, string subject, string message,String name)
+        {
+            var fromAddress = new MailAddress("head.fyp@gmail.com", "System Super Admin");
+            var toAddress = new MailAddress(receiver,name);
+            string fromPassword = "head.fyp123!";
+            string Subject = subject;
+            string body = message;
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+            };
+            using (var mail = new MailMessage(fromAddress, toAddress)
+            {
+                Subject = subject,
+                Body = body
+            })
+            {
+                smtp.Send(mail);
+            }
         }
     }
 }

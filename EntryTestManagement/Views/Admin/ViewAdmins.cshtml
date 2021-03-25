@@ -38,13 +38,13 @@
                                             @foreach (var admin in Model)
                                             {
                                                 var image = "";
-                                                if (@admin.Image != "")
+                                                if (@admin.Image != "" && File.Exists(Server.MapPath(@styleURL + "/" + @admin.Image)))
                                                 {
                                                     image = @styleURL + "/" + @admin.Image;
                                                 }
                                                 else
                                                 {
-                                                    image = @styleURL + "/user";
+                                                    image = @styleURL + "/user.png";
                                                 }
                                                 var FullName = @admin.FirstName + " " + @admin.LastName;
                                                 <tr>
