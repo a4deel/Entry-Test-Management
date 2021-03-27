@@ -325,7 +325,6 @@
   <ItemGroup>
     <Folder Include="Content\styles\" />
     <Folder Include="Scripts\img\" />
-    <Folder Include="Views\Error\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
