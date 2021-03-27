@@ -27,6 +27,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="reset" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UserLogin">
           <Key>
@@ -72,6 +73,7 @@
           <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="reset" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="UserLogin">
           <Key>
@@ -106,6 +108,7 @@
           <EntitySetMapping Name="AdminLogins">
             <EntityTypeMapping TypeName="EntryTestDetailsDBModel1.AdminLogin">
               <MappingFragment StoreEntitySet="AdminLogin">
+                <ScalarProperty Name="reset" ColumnName="reset" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="email" ColumnName="email" />

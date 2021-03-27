@@ -16,9 +16,9 @@
                             <div class="card-header">
                                 <h4 class="card-title">View Admins</h4>
                             </div>
-                            @if (@TempData["Error"] != null)
+                            @if (@TempData["Message"] != null)
                             {
-                                <p style="font-size:x-large;" class="badge badge-danger">@TempData["Error"]</p>
+                                <p style="font-size:x-large;" class="badge badge-danger">@TempData["Message"]</p>
                             }
                             <div class="card-content ">
                                 <div class="card-body card-dashboard table-responsive">

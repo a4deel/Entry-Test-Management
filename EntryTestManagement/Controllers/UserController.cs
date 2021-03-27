@@ -1,10 +1,7 @@
 ﻿using EntryTestManagement.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 using System.Web.Mvc;
 
 namespace EntryTestManagement.Controllers
@@ -52,7 +49,7 @@ namespace EntryTestManagement.Controllers
                 }
                 else
                 {
-                    TempData["Error"] = "*Incorrect Email/Password";
+                    TempData["Message"] = "*Incorrect Email/Password";
                     return RedirectToAction("UserLogin");
                 }
             }
@@ -90,7 +87,7 @@ namespace EntryTestManagement.Controllers
                 }
                 else
                 {
-                    TempData["Error"] = "*Email already exists";
+                    TempData["Message"] = "*Email already exists";
                     return RedirectToAction("RegisterUser");
                 }
             }

@@ -1,6 +1,5 @@
 ﻿using EntryTestManagement.Models;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
@@ -8,7 +7,6 @@ using System.Net;
 using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 using System.Web.Mvc;
 
 namespace EntryTestManagement.Controllers
@@ -19,14 +17,23 @@ namespace EntryTestManagement.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            if (Session["AdminEmail"] != null)
+            if (Session["AdminReset"].Equals("1"))
             {
-                return View();
+                if (Session["AdminEmail"] != null)
+                {
+                    return View();
+                }
+                else
+                {
+                    TempData["Message"] = "Please Login First";
+                    return RedirectToAction("AdminLogin");
+                }
             }
             else
             {
-                return RedirectToAction("AdminLogin");
+                return RedirectToAction("ResetPassword");
             }
+
         }
 
         public ActionResult AdminLogin()
@@ -54,11 +61,19 @@ namespace EntryTestManagement.Controllers
                     Session["AdminID"] = foundAdmin.id.ToString();
                     Session["AdminEmail"] = foundAdmin.email.ToString();
                     Session["AdminRole"] = Admin.Role.ToString();
-                    return RedirectToAction("Index");
+                    Session["AdminReset"] = foundAdmin.reset.ToString();
+                    if (foundAdmin.reset == 0)
+                    {
+                        return RedirectToAction("ResetPassword");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
                 else
                 {
-                    TempData["Error"] = "*Incorrect Email/Password";
+                    TempData["Message"] = "*Incorrect Email/Password";
                     return RedirectToAction("AdminLogin");
                 }
             }
@@ -77,13 +92,21 @@ namespace EntryTestManagement.Controllers
         [HttpGet]
         public ActionResult AddAdmin()
         {
-            if (Session["AdminEmail"] != null)
+            if ((Session["AdminReset"].Equals("1")))
             {
-                return View();
+                if (Session["AdminEmail"] != null)
+                {
+                    return View();
+                }
+                else
+                {
+                    TempData["Message"] = "Please Login First";
+                    return RedirectToAction("AdminLogin");
+                }
             }
             else
             {
-                return RedirectToAction("AdminLogin");
+                return RedirectToAction("ResetPassword");
             }
         }
 
@@ -122,14 +145,14 @@ namespace EntryTestManagement.Controllers
                     DataStorage.SaveChanges();
                     admin.ImageFile.SaveAs(UploadPath);
                     string subject = "Admin Password Reset Invitation";
-                    var message = "Your dummy password is generated kindly reset this password and update it. Your password is "+pass;
-                    sendEmail(admin.email,subject,message,fullName);
-                    TempData["Error"] = "New Sub Admin Added Successfully";
+                    string message = "Your random password is generated. Kindly take a moment and reset it.Without reseting your password you may not be able to access your Sub Admin Account. Your current password is " + pass;
+                    sendEmail(admin.email, subject, message, fullName);
+                    TempData["Message"] = "New Sub Admin Added Successfully";
                     return RedirectToAction("AddAdmin");
                 }
                 else
                 {
-                    TempData["Error"] = "Admin Already Exists";
+                    TempData["Message"] = "Admin Already Exists";
                     return RedirectToAction("AddAdmin");
                 }
             }
@@ -140,42 +163,60 @@ namespace EntryTestManagement.Controllers
         }
         public ActionResult ViewAdmins()
         {
-            if (Session["AdminEmail"] != null)
+            if ((Session["AdminReset"].Equals("1")))
             {
-                var admins = DataStorage.AdminDatas.ToList();
-                return View(admins);
+                if (Session["AdminEmail"] != null)
+                {
+                    var admins = DataStorage.AdminDatas.ToList();
+                    return View(admins);
+                }
+                else
+                {
+                    TempData["Message"] = "Please Login First";
+                    return RedirectToAction("AdminLogin");
+                }
             }
             else
             {
-                return RedirectToAction("AdminLogin");
+                return RedirectToAction("ResetPassword");
             }
         }
 
         [HttpGet]
         public ActionResult AdminProfile(int? id)
         {
-            if (Session["AdminEmail"] != null)
+            if ((Session["AdminReset"].Equals("1")))
             {
-                if (id != null)
+                if (Session["AdminEmail"] != null)
                 {
-                    var admin = DataStorage.AdminDatas.Find(id);
-                    if (admin != null)
+                    if (id != null)
                     {
-                        return View(admin);
+                        var admin = DataStorage.AdminDatas.Find(id);
+                        if (admin != null)
+                        {
+                            return View(admin);
+                        }
+                        else
+                        {
+                            TempData["Message"] = "Admin Not Found";
+                            return RedirectToAction("ViewAdmins");
+                        }
                     }
                     else
                     {
+                        TempData["Message"] = "NULL ID is given";
                         return RedirectToAction("ViewAdmins");
                     }
                 }
                 else
                 {
-                    return RedirectToAction("ViewAdmins");
+                    TempData["Message"] = "Please Login First";
+                    return RedirectToAction("AdminLogin");
                 }
             }
             else
             {
-                return RedirectToAction("AdminLogin");
+                return RedirectToAction("ResetPassword");
             }
         }
 
@@ -195,13 +236,13 @@ namespace EntryTestManagement.Controllers
                 }
                 else
                 {
-                    TempData["Error"] = "Admin Not Found";
+                    TempData["Message"] = "Admin Not Found";
                     return RedirectToAction("ViewAdmins");
                 }
             }
             else
             {
-                TempData["Error"] = "Null ID is given/Only Super Admin Can Perform This Operation";
+                TempData["Message"] = "NULL ID is given/Only Super Admin Can Perform This Operation";
                 return RedirectToAction("ViewAdmins");
             }
         }
@@ -209,23 +250,31 @@ namespace EntryTestManagement.Controllers
         [HttpGet]
         public ActionResult EditAdmin(int? id)
         {
-            if (id != null && Session["AdminRole"].Equals("Super"))
+            if (Session["AdminEmail"] != null)
             {
-                AdminData adminData = DataStorage.AdminDatas.Find(id);
-                if (adminData != null)
+                if (id != null && Session["AdminRole"].Equals("Super"))
                 {
-                    return View(adminData);
+                    AdminData adminData = DataStorage.AdminDatas.Find(id);
+                    if (adminData != null)
+                    {
+                        return View(adminData);
+                    }
+                    else
+                    {
+                        TempData["Message"] = "Admin Not Found";
+                        return RedirectToAction("ViewAdmins");
+                    }
                 }
                 else
                 {
-                    TempData["Error"] = "Admin Not Found";
+                    TempData["Message"] = "Null ID is given/Only Super Admin Can Perform This Operation";
                     return RedirectToAction("ViewAdmins");
                 }
             }
             else
             {
-                TempData["Error"] = "Null ID is given/Only Super Admin Can Perform This Operation";
-                return RedirectToAction("ViewAdmins");
+                TempData["Message"] = "Please Login First";
+                return RedirectToAction("AdminLogin");
             }
         }
 
@@ -258,6 +307,51 @@ namespace EntryTestManagement.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult ResetPassword()
+        {
+
+            if (Session["AdminEmail"] != null)
+            {
+                if ((Session["AdminReset"].Equals("0")))
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            else
+            {
+                TempData["Message"] = "Please login First";
+                return RedirectToAction("AdminLogin");
+            }           
+        }
+
+        [HttpPost]
+        public ActionResult ResetPassword(AdminLogin obj)
+        {
+            int id = Int32.Parse(Session["AdminID"].ToString());
+            String Password = Request["password"];
+            String ConfirmPassword = Request["confirm_password"];
+            if (Password.Equals(ConfirmPassword))
+            {
+                AdminLogin admin = DataStorage.AdminLogins.Find(id);
+                admin.password = Password;
+                admin.reset = 1;
+                DataStorage.SaveChanges();
+                Session.Clear();
+                TempData["Message"] = "Password Reset Successful";
+                return RedirectToAction("AdminLogin");
+            }
+            else
+            {
+                TempData["Message"] = "Passwords Do not match.";
+                return View();
+            }
+        }
+
         private string GetMD5(string str)
         {
             MD5 md5 = new MD5CryptoServiceProvider();
@@ -286,10 +380,10 @@ namespace EntryTestManagement.Controllers
             return new string(chars);
         }
 
-        private void sendEmail(string receiver, string subject, string message,String name)
+        private void sendEmail(string receiver, string subject, string message, String name)
         {
             var fromAddress = new MailAddress("head.fyp@gmail.com", "System Super Admin");
-            var toAddress = new MailAddress(receiver,name);
+            var toAddress = new MailAddress(receiver, name);
             string fromPassword = "head.fyp123!";
             string Subject = subject;
             string body = message;

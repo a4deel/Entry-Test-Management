@@ -25,7 +25,6 @@ namespace EntryTestManagement.Models
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Contact is Required")]
-        [RegularExpression(@"^((\+92)|(0092))-{0,1}\d{3}-{0,1}\d{7}$|^\d{11}$|^\d{4}-\d{7}$", ErrorMessage = "Contact must Follow +92/03XX-XXXXXXX")]
         public string Contact { get; set; }
 
         public string Image { get; set; }
@@ -37,7 +36,6 @@ namespace EntryTestManagement.Models
         public string Address { get; set; }
 
         [Required(ErrorMessage = "CNIC is Required")]
-        //[RegularExpression("^[0-9]{5}-[0-9]{7}-[0-9]$", ErrorMessage = "CNIC No must follow XXXXX-XXXXXXX-X format!")]
         public Nullable<decimal> CNIC { get; set; }
         public int id { get; set; }
         public string Role { get; set; }

@@ -28,9 +28,9 @@
                                                     @using (Html.BeginForm("RegisterUser", "User", FormMethod.Post))
                                                     {
                                                         @Html.ValidationSummary(true)
-                                                        if (@TempData["Error"] != null)
+                                                        if (@TempData["Message"] != null)
                                                         {
-                                                            <p style="color:red !important;font-size:x-large;">@TempData["Error"]</p>
+                                                            <p style="color:red !important;font-size:x-large;">@TempData["Message"]</p>
                                                         }
                                                         @Html.AntiForgeryToken()
                                                         @Html.TextBoxFor(user => user.email, "", new { @class = "form-control mb-1", @placeholder = "Email" })

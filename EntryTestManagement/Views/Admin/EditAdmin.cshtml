@@ -17,9 +17,9 @@
                             @using (@Html.BeginForm("EditAdmin", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
                                 @Html.ValidationSummary(true)
-                                if (@TempData["Error"] != null)
+                                if (@TempData["Message"] != null)
                                 {
-                                    <p style="color:red !important;font-size:x-large;">@TempData["Error"]</p>
+                                    <p style="color:red !important;font-size:x-large;">@TempData["Message"]</p>
                                 }
                                 @Html.AntiForgeryToken()
                                 <div class="form-body">
