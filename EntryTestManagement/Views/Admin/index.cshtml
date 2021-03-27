@@ -1,10 +1,14 @@
 ﻿@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var AdminName = Session["AdminName"];
 }
 
 <div class="main-panel">
     <div class="main-content">
         <div class="content-wrapper">
+            <div class="message">
+                <p class="badge badge-success">Dear @Session["AdminRole"] Admin @AdminName, Welcome To Dashboard</p>
+            </div>
             <div class="row">
                 <div class="col-xl-3 col-lg-6 col-md-6 col-12">
                     <div class="card gradient-blackberry">

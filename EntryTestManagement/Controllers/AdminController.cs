@@ -17,21 +17,22 @@ namespace EntryTestManagement.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            if (Session["AdminReset"].Equals("1"))
+            if (Session["AdminEmail"] != null)
             {
-                if (Session["AdminEmail"] != null)
+                if (Session["AdminReset"].Equals("1"))
                 {
                     return View();
                 }
                 else
                 {
-                    TempData["Message"] = "Please Login First";
-                    return RedirectToAction("AdminLogin");
+                    TempData["Message"] = "Kindly Reset Password First";
+                    return RedirectToAction("ResetPassword");
                 }
             }
             else
             {
-                return RedirectToAction("ResetPassword");
+                TempData["Message"] = "Dear Admin Kindly Login First";
+                return RedirectToAction("AdminLogin");
             }
 
         }
@@ -58,10 +59,16 @@ namespace EntryTestManagement.Controllers
                 if (foundAdmin != null)
                 {
                     var Admin = DataStorage.AdminDatas.Where(obj => obj.email.Equals(admin.email)).FirstOrDefault();
+
                     Session["AdminID"] = foundAdmin.id.ToString();
                     Session["AdminEmail"] = foundAdmin.email.ToString();
-                    Session["AdminRole"] = Admin.Role.ToString();
                     Session["AdminReset"] = foundAdmin.reset.ToString();
+
+                    Session["AdminRole"] = Admin.Role.ToString();
+                    Session["AdminName"] = Admin.FirstName.ToString() + " " + Admin.LastName.ToString();
+
+                    Session["LoggedIn"] = "Admin";
+
                     if (foundAdmin.reset == 0)
                     {
                         return RedirectToAction("ResetPassword");
@@ -92,21 +99,30 @@ namespace EntryTestManagement.Controllers
         [HttpGet]
         public ActionResult AddAdmin()
         {
-            if ((Session["AdminReset"].Equals("1")))
+            if (Session["AdminEmail"] != null)
             {
-                if (Session["AdminEmail"] != null)
+                if(Session["AdminRole"].Equals("Super"))
                 {
-                    return View();
+                    if (Session["AdminReset"].Equals("1"))
+                    {
+                        return View();
+                    }
+                    else
+                    {
+                        TempData["Message"] = "Kindly Reset Password First";
+                        return RedirectToAction("ResetPassword");
+                    }
                 }
                 else
                 {
-                    TempData["Message"] = "Please Login First";
-                    return RedirectToAction("AdminLogin");
+                    TempData["Message"] = "Only Super Admin Can Add New Admin";
+                    return RedirectToAction("ViewAdmins");
                 }
             }
             else
             {
-                return RedirectToAction("ResetPassword");
+                 TempData["Message"] = "Dear Admin Kindly Login First";
+                return RedirectToAction("AdminLogin");
             }
         }
 
@@ -144,10 +160,12 @@ namespace EntryTestManagement.Controllers
                     DataStorage.AdminDatas.Add(admin);
                     DataStorage.SaveChanges();
                     admin.ImageFile.SaveAs(UploadPath);
+
                     string subject = "Admin Password Reset Invitation";
                     string message = "Your random password is generated. Kindly take a moment and reset it.Without reseting your password you may not be able to access your Sub Admin Account. Your current password is " + pass;
                     sendEmail(admin.email, subject, message, fullName);
                     TempData["Message"] = "New Sub Admin Added Successfully";
+
                     return RedirectToAction("AddAdmin");
                 }
                 else
@@ -163,31 +181,32 @@ namespace EntryTestManagement.Controllers
         }
         public ActionResult ViewAdmins()
         {
-            if ((Session["AdminReset"].Equals("1")))
+            if (Session["AdminEmail"] != null)
             {
-                if (Session["AdminEmail"] != null)
+                if (Session["AdminReset"].Equals("1"))
                 {
                     var admins = DataStorage.AdminDatas.ToList();
                     return View(admins);
                 }
                 else
                 {
-                    TempData["Message"] = "Please Login First";
-                    return RedirectToAction("AdminLogin");
+                    TempData["Message"] = "Kindly Reset Password First";
+                    return RedirectToAction("ResetPassword");
                 }
             }
             else
             {
-                return RedirectToAction("ResetPassword");
+                 TempData["Message"] = "Dear Admin Kindly Login First";
+                return RedirectToAction("AdminLogin");
             }
         }
 
         [HttpGet]
         public ActionResult AdminProfile(int? id)
         {
-            if ((Session["AdminReset"].Equals("1")))
+            if (Session["AdminEmail"] != null)
             {
-                if (Session["AdminEmail"] != null)
+                if (Session["AdminReset"].Equals("1"))
                 {
                     if (id != null)
                     {
@@ -210,40 +229,49 @@ namespace EntryTestManagement.Controllers
                 }
                 else
                 {
-                    TempData["Message"] = "Please Login First";
-                    return RedirectToAction("AdminLogin");
+                    TempData["Message"] = "Kindly Reset Password First";
+                    return RedirectToAction("ResetPassword");
                 }
             }
             else
             {
-                return RedirectToAction("ResetPassword");
+                 TempData["Message"] = "Dear Admin Kindly Login First";
+                return RedirectToAction("AdminLogin");
             }
         }
 
         [HttpGet]
         public ActionResult DeleteAdmin(int? id)
         {
-            if (id != null && Session["AdminRole"].Equals("Super"))
+            if (Session["AdminEmail"] != null)
             {
-                AdminData adminData = DataStorage.AdminDatas.Find(id);
-                AdminLogin adminLogin = DataStorage.AdminLogins.Find(id);
-                if (adminData != null && adminLogin != null)
+                if (id != null && Session["AdminRole"].Equals("Super"))
                 {
-                    DataStorage.AdminDatas.Remove(adminData);
-                    DataStorage.AdminLogins.Remove(adminLogin);
-                    DataStorage.SaveChanges();
-                    return RedirectToAction("ViewAdmins");
+                    AdminData adminData = DataStorage.AdminDatas.Find(id);
+                    AdminLogin adminLogin = DataStorage.AdminLogins.Find(id);
+                    if (adminData != null && adminLogin != null)
+                    {
+                        DataStorage.AdminDatas.Remove(adminData);
+                        DataStorage.AdminLogins.Remove(adminLogin);
+                        DataStorage.SaveChanges();
+                        return RedirectToAction("ViewAdmins");
+                    }
+                    else
+                    {
+                        TempData["Message"] = "Admin Not Found";
+                        return RedirectToAction("ViewAdmins");
+                    }
                 }
                 else
                 {
-                    TempData["Message"] = "Admin Not Found";
+                    TempData["Message"] = "NULL ID is given/Only Super Admin Can Perform This Operation";
                     return RedirectToAction("ViewAdmins");
                 }
             }
             else
             {
-                TempData["Message"] = "NULL ID is given/Only Super Admin Can Perform This Operation";
-                return RedirectToAction("ViewAdmins");
+                TempData["Message"] = "Dear Admin Kindly Login First";
+                return RedirectToAction("AdminLogin");
             }
         }
 
@@ -273,8 +301,8 @@ namespace EntryTestManagement.Controllers
             }
             else
             {
-                TempData["Message"] = "Please Login First";
-                return RedirectToAction("AdminLogin");
+                 TempData["Message"] = "Dear Admin Kindly Login First";
+                 return RedirectToAction("AdminLogin");
             }
         }
 
@@ -290,15 +318,16 @@ namespace EntryTestManagement.Controllers
                     name = Path.GetFileName(admin.ImageFile.FileName);
                     UploadPath = Server.MapPath("~\\Content\\styles\\img\\admins\\" + name);
                     admin.Image = name;
+                    admin.ImageFile.SaveAs(UploadPath);
                 }
                 else
                 {
-                    admin.Image = "user.png";
+                    admin.Image = Session["Image"].ToString();
+                    Session["Image"] = "";
                 }
                 admin.Role = "Sub";
                 DataStorage.Entry(admin).State = EntityState.Modified;
                 DataStorage.SaveChanges();
-                admin.ImageFile.SaveAs(UploadPath);
                 return RedirectToAction("ViewAdmins");
             }
             else
@@ -324,9 +353,9 @@ namespace EntryTestManagement.Controllers
             }
             else
             {
-                TempData["Message"] = "Please login First";
+                 TempData["Message"] = "Dear Admin Kindly Login First";
                 return RedirectToAction("AdminLogin");
-            }           
+            }
         }
 
         [HttpPost]
@@ -347,7 +376,7 @@ namespace EntryTestManagement.Controllers
             }
             else
             {
-                TempData["Message"] = "Passwords Do not match.";
+                TempData["Message"] = "Passwords Do not match";
                 return View();
             }
         }

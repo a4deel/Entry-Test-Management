@@ -16,11 +16,12 @@
                         <div class="px-3">
                             @using (@Html.BeginForm("EditAdmin", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
-                                @Html.ValidationSummary(true)
-                                if (@TempData["Message"] != null)
-                                {
+                                { Session["Image"] = @Model.Image.ToString();}
+                                    @Html.ValidationSummary(true)
+                                    if (@TempData["Message"] != null)
+                                    {
                                     <p style="color:red !important;font-size:x-large;">@TempData["Message"]</p>
-                                }
+                                    }
                                 @Html.AntiForgeryToken()
                                 <div class="form-body">
                                     <h4 class="form-section"><i class="ft-info"></i> About Admin</h4>
@@ -90,7 +91,7 @@
                                     </button>
                                 </div>
                                 <div class="recover-pass">
-                                    <input type="submit" id="submit" name="submit" class="btn btn-raised btn-primary mr-1" value="Add Admin">
+                                    <input type="submit" id="submit" name="submit" class="btn btn-raised btn-primary mr-1" value="Update Admin">
                                 </div>
                             }
                         </div>

@@ -60125,3 +60125,14 @@ input[type=submit] {
   border-radius: 4px;
   cursor: pointer;
 }
+
+.message {
+  margin: auto;
+  width: 70%;
+}
+.message> p {
+  font-size :x-large;
+  padding: 20px;
+  margin-top: 20px;
+  text-transform: uppercase;
+}

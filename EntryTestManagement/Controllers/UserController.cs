@@ -45,6 +45,7 @@ namespace EntryTestManagement.Controllers
                 if (foundUser != null)
                 {
                     Session["UserEmail"] = foundUser.email.ToString();
+                    Session["LoggedIn"] = "User";
                     return RedirectToAction("Index");
                 }
                 else
