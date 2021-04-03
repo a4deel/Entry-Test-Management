@@ -29,7 +29,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="userinput1">First Name</label>
-                                                @Html.TextBoxFor(admin => admin.FirstName, "", new { @class = "form-control mb-1" })
+                                                @Html.TextBoxFor(admin => admin.FirstName, "", new { autofocus = "autofocus", @class = "form-control mb-1" })
                                                 @Html.ValidationMessageFor(admin => admin.FirstName, "", new { @class = "badge badge-danger" })
                                             </div>
                                         </div>

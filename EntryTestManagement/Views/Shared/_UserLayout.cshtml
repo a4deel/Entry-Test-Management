@@ -1,11 +1,12 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en" class="loading">
 <head>
-    @Html.Partial("_HeadUser")
+    @Html.Partial("_Head")
 </head>
 <body data-col="2-columns" class="2-columns layout-dark layout-transparent bg-glass-1">
+    @Html.Partial("_UserHeader")
     @RenderBody()
-    @Html.Partial("_FootUser")
+    @Html.Partial("_Footer")
 </body>
 </html>
-

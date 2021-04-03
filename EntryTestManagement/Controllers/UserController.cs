@@ -44,6 +44,7 @@ namespace EntryTestManagement.Controllers
                 var foundUser = DataStorage.UserLogins.Where(obj => obj.email.Equals(user.email) && obj.password.Equals(user.password)).FirstOrDefault();
                 if (foundUser != null)
                 {
+                    Session["AdminID"] = foundUser.id.ToString();
                     Session["UserEmail"] = foundUser.email.ToString();
                     Session["LoggedIn"] = "User";
                     return RedirectToAction("Index");

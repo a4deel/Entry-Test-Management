@@ -1,0 +1,55 @@
+﻿@{
+    var @styleURL = "/Content/styles";
+}
+<div class="wrapper">
+    <div data-active-color="white" data-background-color="" data-image="" class="app-sidebar">
+        <div class="sidebar-header">
+            <div class="logo clearfix">
+                <a href="/User/Index" class="logo-text float-left">
+                    <div class="logo-img"><img src="@styleURL/img/gallery/logo.png" style="width: 120%;" /></div><span class="text align-middle">PUCIT</span>
+                </a><a id="sidebarToggle" href="javascript:;" class="nav-toggle d-none d-sm-none d-md-none d-lg-block">
+                    <i data-toggle="expanded" class="toggle-icon ft-toggle-right"></i>
+                </a><a id="sidebarClose"
+                       href="javascript:;" class="nav-close d-block d-md-block d-lg-none d-xl-none"><i class="ft-x"></i></a>
+            </div>
+        </div>
+        <div class="sidebar-content">
+            <div class="nav-container">
+                <ul id="main-menu-navigation" data-menu="menu-navigation" data-scroll-to-active="true"
+                    class="navigation navigation-main">
+                    <li class="nav-item">
+                        @{
+                            var id = @Session["UserID"];
+                        }
+                        <a href="@Url.Action("#","User",new {@id})">
+                            <i class="ft-droplet"></i><span data-i18n=""
+                                                            class="menu-title">My Profile</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("#","User")">
+                            <i class="ft-droplet"></i><span data-i18n=""
+                                                            class="menu-title">Edit Profile</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="ft-droplet"></i><span data-i18n=""
+                                                            class="menu-title">Challan Form</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="ft-message-square"></i><span data-i18n=""
+                                                                   class="menu-title">Roll Number Slip</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="recover-pass" style="margin-left:5.5rem;">
+                    <a href="@Url.Action("Logout","User")" class="btn btn-primary text-decoration-none text-white">Logout</a>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar-background"></div>
+    </div>
+

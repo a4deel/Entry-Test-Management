@@ -293,10 +293,11 @@
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Shared\_Head.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
-    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_AdminHeader.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\NotFound.cshtml" />
     <Content Include="Views\Shared\_UserLayout.cshtml" />
+    <Content Include="Views\Shared\_UserHeader.cshtml" />
     <None Include="Views\User\UserLogin.cshtml" />
     <None Include="Views\User\RegisterUser.cshtml" />
     <None Include="Views\Admin\index.cshtml" />

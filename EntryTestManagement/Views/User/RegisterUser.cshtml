@@ -33,7 +33,7 @@
                                                             <p style="color:red !important;font-size:x-large;">@TempData["Message"]</p>
                                                         }
                                                         @Html.AntiForgeryToken()
-                                                        @Html.TextBoxFor(user => user.email, "", new { @class = "form-control mb-1", @placeholder = "Email" })
+                                                        @Html.TextBoxFor(user => user.email, "", new { autofocus = "autofocus", @class = "form-control mb-1", @placeholder = "Email" })
                                                         @Html.ValidationMessageFor(user => user.email, "", new { @class = "badge badge-danger" })
                                                         @Html.PasswordFor(user => user.password, new { @class = "form-control mb-1", @placeholder = "Password" })
                                                         @Html.ValidationMessageFor(user => user.password, "", new { @class = "badge badge-danger" })
