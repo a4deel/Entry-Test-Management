@@ -1,277 +1,198 @@
-﻿<script>
-
-    if (performance.navigation.type == 2) {
-      location.reload();
-    }
-
-</script>
-<!DOCTYPE html>
-<html lang="en" class="loading">
-<!-- BEGIN : Head-->
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description"
-          content="Apex admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords"
-          content="admin template, Apex admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
-    <title>PUCIT - Entry Test Registration Portal</title>
-    <link rel="apple-touch-icon" sizes="60x60" href="app-assets/img/ico/apple-icon-60.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="app-assets/img/ico/apple-icon-76.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="app-assets/img/ico/apple-icon-120.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="app-assets/img/ico/apple-icon-152.png">
-    <link rel="shortcut icon" type="image/x-icon" href="app-assets/img/ico/favicon.ico">
-    <link rel="shortcut icon" type="image/png" href="app-assets/img/ico/favicon-32.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-touch-fullscreen" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900|Montserrat:300,400,500,600,700,800,900"
-          rel="stylesheet">
-    <!-- BEGIN VENDOR CSS-->
-    <!-- font icons-->
-    <link rel="stylesheet" type="text/css" href="app-assets/fonts/feather/style.min.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/fonts/simple-line-icons/style.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/fonts/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/perfect-scrollbar.min.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/prism.min.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/chartist.min.css">
-    <!-- END VENDOR CSS-->
-    <!-- BEGIN APEX CSS-->
-    <link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
-    <!-- END APEX CSS-->
-    <!-- BEGIN Page Level CSS-->
-    <!-- END Page Level CSS-->
-</head>
-<!-- END : Head-->
-<!-- BEGIN : Body-->
-<body data-col="2-columns" class=" 2-columns layout-dark layout-transparent bg-glass-1">
+﻿@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+    var UserName = Session["UserName"];
+}
     <!-- ////////////////////////////////////////////////////////////////////////////-->
     <div class="wrapper">
 
+
         <!-- main menu-->
         <!--.main-menu(class="#{menuColor} #{menuOpenType}", class=(menuShadow == true ? 'menu-shadow' : ''))-->
-        <div data-active-color="white" data-background-color="" data-image="" class="app-sidebar">
-            <!-- main menu header-->
-            <!-- Sidebar Header starts-->
-            <div class="sidebar-header">
-                <div class="logo clearfix">
-                    <a href="index.html" class="logo-text float-left">
-                        <div class="logo-img"><img src="app-assets/img/gallery/logo.png" style="width: 120%;" /></div><span class="text align-middle">PUCIT</span>
-                    </a><a id="sidebarToggle" href="javascript:;" class="nav-toggle d-none d-sm-none d-md-none d-lg-block">
-                        <i data-toggle="expanded" class="toggle-icon ft-toggle-right"></i>
-                    </a><a id="sidebarClose"
-                           href="javascript:;" class="nav-close d-block d-md-block d-lg-none d-xl-none"><i class="ft-x"></i></a>
-                </div>
-            </div>
-            <!-- Sidebar Header Ends-->
-            <!-- / main menu header-->
-            <!-- main menu content-->
-            <div class="sidebar-content">
-                <div class="nav-container">
-                    <ul id="main-menu-navigation" data-menu="menu-navigation" data-scroll-to-active="true"
-                        class="navigation navigation-main">
-                        <li class=" nav-item">
-                            <a href="ViewCandidates.html">
-                                <i class="ft-droplet"></i><span data-i18n=""
-                                                                class="menu-title">View Candidates</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="ViewAdmins.html">
-                                <i class="ft-droplet"></i><span data-i18n=""
-                                                                class="menu-title">View Admins</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="CheckStatus.html">
-                                <i class="ft-mail"></i><span data-i18n=""
-                                                             class="menu-title">Check Status</span>
-                            </a>
-                        </li>
-                        <li class=" nav-item">
-                            <a href="IssueRollNumberSlip.html">
-                                <i class="ft-message-square"></i><span data-i18n=""
-                                                                       class="menu-title">Issue Roll Number</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="AddAdmin.html">
-                                <i class="ft-file-text"></i><span data-i18n=""
-                                                                  class="menu-title">Add Admin</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="ViewComplaints.html">
-                                <i class="ft-file-text"></i><span data-i18n=""
-                                                                  class="menu-title">View Complaints</span>
-                            </a>
-                        </li>
-                        <center>
-                            <div class="recover-pass">
-                                <button class="btn btn-primary">
-                                    <a href="/User/Logout" class="text-decoration-none text-white">Logout</a>
-                                </button>
-                            </div>
-                        </center>
-                    </ul>
-                </div>
-            </div>
-            <!-- main menu content-->
-            <div class="sidebar-background"></div>
-            <!-- main menu footer-->
-            <!-- include includes/menu-footer-->
-            <!-- main menu footer-->
-        </div>
         <!-- / main menu-->
+
 
         <div class="main-panel">
             <!-- BEGIN : Main Content-->
             <div class="main-content">
                 <div class="content-wrapper">
+                    <!-- Wizard Starts -->
                     <div class="row">
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-12">
-                            <div class="card gradient-blackberry">
-                                <div class="card-content">
-                                    <div class="card-body pt-2 pb-0">
-                                        <div class="media">
-                                            <div class="media-body white text-left">
-                                                <h3 class="font-large-1 mb-0">2156</h3>
-                                                <span>Total Candidates</span>
-                                            </div>
-                                            <div class="media-right white text-right">
-                                                <i class="icon-pie-chart font-large-1"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="Widget-line-chart" class="height-75 WidgetlineChart WidgetlineChartshadow mb-2">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-12">
-                            <div class="card gradient-blackberry">
-                                <div class="card-content">
-                                    <div class="card-body pt-2 pb-0">
-                                        <div class="media">
-                                            <div class="media-body white text-left">
-                                                <h3 class="font-large-1 mb-0">2156</h3>
-                                                <span>Registered Candidates</span>
-                                            </div>
-                                            <div class="media-right white text-right">
-                                                <i class="icon-pie-chart font-large-1"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="Widget-line-chart" class="height-75 WidgetlineChart WidgetlineChartshadow mb-2">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-12">
-                            <div class="card gradient-ibiza-sunset">
-                                <div class="card-content">
-                                    <div class="card-body pt-2 pb-0">
-                                        <div class="media">
-                                            <div class="media-body white text-left">
-                                                <h3 class="font-large-1 mb-0">1567</h3>
-                                                <span>Issued Roll Numbers</span>
-                                            </div>
-                                            <div class="media-right white text-right">
-                                                <i class="icon-bulb font-large-1"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="Widget-line-chart1" class="height-75 WidgetlineChart WidgetlineChartshadow mb-2">
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-sm-12">
+                            <div class="content-header">Registration Form</div>
                         </div>
                     </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-12">
-                            <div class="card gradient-ibiza-sunset">
-                                <div class="card-content">
-                                    <div class="card-body pt-2 pb-0">
-                                        <div class="media">
-                                            <div class="media-body white text-left">
-                                                <h3 class="font-large-1 mb-0">15</h3>
-                                                <span>Total Admins</span>
-                                            </div>
-                                            <div class="media-right white text-right">
-                                                <i class="icon-bulb font-large-1"></i>
-                                            </div>
-                                        </div>
+                    <section id="icon-tabs" style="margin-right: 250px;">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Personal User Information Form</h4>
                                     </div>
-                                    <div id="Widget-line-chart1" class="height-75 WidgetlineChart WidgetlineChartshadow mb-2">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <form class="icons-tab-steps wizard-circle" #f="ngForm">
+                                                <!-- Step 1 -->
+                                                <h6>Personal Information</h6>
+                                                <fieldset>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="firstName2">First Name</label>
+                                                                <input type="text" class="form-control" id="firstName2" name="firstName2">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="lastName2">Last Name</label>
+                                                                <input type="text" class="form-control" id="lastName2" name="lastName2">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="firstName3">Father's name</label>
+                                                                <input type="text" class="form-control" id="firstName3" name="firstName3">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="firstName3">Father's occupation</label>
+                                                                <input type="text" class="form-control" id="firstName3" name="firstName3">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="emailAddress3">Email Address</label>
+                                                                <input type="email" class="form-control" id="emailAddress3" name="emailAddress3">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="location2">City</label>
+                                                                <input type="text" class="form-control" id="location2" name="location2">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="phoneNumber2">Phone Number</label>
+                                                                <input number class="form-control" id="phoneNumber2" name="phoneNumber2">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="date2">Date of Birth</label>
+                                                                <div class='input-group'>
+                                                                    <input type='text' class="form-control pickadate" placeholder="Date of birth" />
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text">
+                                                                            <span class="fa fa-calendar-o"></span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <!-- Step 2 -->
+                                                <h6>Contact Information</h6>
+                                                <fieldset>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="proposalTitle2">Home Address</label>
+                                                                <input type="text" class="form-control" id="proposalTitle2" name="proposalTitle2">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="emailAddress4">Country</label>
+                                                                <input type="text" class="form-control" id="emailAddress4" name="emailAddress4">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="jobTitle3">Zip Code</label>
+                                                                <input type="text" class="form-control" id="jobTitle3" name="jobTitle3">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="shortDescription2">City</label>
+                                                                <input type="text" class="form-control" id="jobTitle3" name="jobTitle3">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <!-- Step 3 -->
+                                                <h6>Educational Information</h6>
+                                                <fieldset>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="eventName2">Matric Roll Number</label>
+                                                                <input type="text" class="form-control" id="eventName2" name="eventName2">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="eventType2">Matric Board</label>
+                                                                <input type="text" class="form-control" id="eventType2" name="eventType2">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="eventType2">Matric marks</label>
+                                                                <input type="text" class="form-control" id="eventType2" name="eventType2">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="eventStatus2">Inter Board</label>
+                                                                <input type="text" class="form-control" id="eventStatus2" name="eventStatus2">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="eventLocation2">Inter Roll Number</label>
+                                                                <input type="text" class="form-control" id="eventType2" name="eventType2">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="eventStatus2">Inter marks</label>
+                                                                <input type="text" class="form-control" id="eventStatus2" name="eventStatus2">
+                                                            </div>
+
+
+                                                        </div>
+                                                </fieldset>
+                                                <!-- Step 4 -->
+                                                <h6>Finalize</h6>
+                                                <fieldset>
+                                                    <div class="row">
+                                                        <div class="fg-actions d-flex justify-content-between">
+                                                            <div class="login-btn">
+                                                                <button class="btn btn-primary" style="margin-left: 100px;">
+                                                                    Click To download Admission Form
+                                                                    </a>
+                                                                </button>
+                                                            </div>
+                                                            <div class="fg-actions d-flex justify-content-between">
+                                                                <div class="login-btn">
+                                                                    <button class="btn btn-primary" style="margin-left: 100px;">
+                                                                        Click To download Challan Form
+                                                                        </a>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-12">
-                            <div class="card gradient-green-tea">
-                                <div class="card-content">
-                                    <div class="card-body pt-2 pb-0">
-                                        <div class="media">
-                                            <div class="media-body white text-left">
-                                                <h3 class="font-large-1 mb-0">4566</h3>
-                                                <span>Registered Complaints</span>
-                                            </div>
-                                            <div class="media-right white text-right">
-                                                <i class="icon-graph font-large-1"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="Widget-line-chart2" class="height-75 WidgetlineChart WidgetlineChartshadow mb-2">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-12">
-                            <div class="card gradient-pomegranate">
-                                <div class="card-content">
-                                    <div class="card-body pt-2 pb-0">
-                                        <div class="media">
-                                            <div class="media-body white text-left">
-                                                <h3 class="font-large-1 mb-0">8695</h3>
-                                                <span>Resolved Complaints</span>
-                                            </div>
-                                            <div class="media-right white text-right">
-                                                <i class="icon-wallet font-large-1"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="Widget-line-chart3" class="height-75 WidgetlineChart WidgetlineChartshadow mb-2">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <!-- ////////////////////////////////////////////////////////////////////////////-->
-                    <!-- BEGIN VENDOR JS-->
-                    <script src="app-assets/vendors/js/core/jquery-3.2.1.min.js" type="text/javascript"></script>
-                    <script src="app-assets/vendors/js/core/popper.min.js" type="text/javascript"></script>
-                    <script src="app-assets/vendors/js/core/bootstrap.min.js" type="text/javascript"></script>
-                    <script src="app-assets/vendors/js/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
-                    <script src="app-assets/vendors/js/prism.min.js" type="text/javascript"></script>
-                    <script src="app-assets/vendors/js/jquery.matchHeight-min.js" type="text/javascript"></script>
-                    <script src="app-assets/vendors/js/screenfull.min.js" type="text/javascript"></script>
-                    <script src="app-assets/vendors/js/pace/pace.min.js" type="text/javascript"></script>
-                    <!-- BEGIN VENDOR JS-->
-                    <!-- BEGIN PAGE VENDOR JS-->
-                    <script src="app-assets/vendors/js/chartist.min.js" type="text/javascript"></script>
-                    <!-- END PAGE VENDOR JS-->
-                    <!-- BEGIN APEX JS-->
-                    <script src="app-assets/js/app-sidebar.js" type="text/javascript"></script>
-                    <script src="app-assets/js/notification-sidebar.js" type="text/javascript"></script>
-                    <script src="app-assets/js/customizer.js" type="text/javascript"></script>
-                    <!-- END APEX JS-->
-                    <!-- BEGIN PAGE LEVEL JS-->
-                    <script src="app-assets/js/dashboard1.js" type="text/javascript"></script>
-                    <!-- END PAGE LEVEL JS-->
-</body>
-<!-- END : Body-->
-</html>
+                    </section>
+                    <!-- Wizard Ends -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
