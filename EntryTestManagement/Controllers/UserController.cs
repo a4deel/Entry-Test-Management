@@ -1,4 +1,5 @@
 ﻿using EntryTestManagement.Models;
+using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -96,6 +97,38 @@ namespace EntryTestManagement.Controllers
             else
             {
                 return View(user);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Complain()
+        {
+            if (Session["UserEmail"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["Message"] = "Dear User Kindly Login First";
+                return RedirectToAction("UserLogin");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Complain(Complaint comp)
+        {
+            if(ModelState.IsValid)
+            {
+                comp.Date = DateTime.Now.ToString("dddd, dd MMMM yyyy hh:mm tt");
+                comp.Status = "Pending";
+                comp.UserEmail = Session["UserEmail"].ToString();
+                DataStorage.Complaints.Add(comp);
+                DataStorage.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(comp);
             }
         }
 

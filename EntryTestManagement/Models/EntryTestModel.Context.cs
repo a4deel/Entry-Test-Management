@@ -28,5 +28,6 @@ namespace EntryTestManagement.Models
         public virtual DbSet<AdminData> AdminDatas { get; set; }
         public virtual DbSet<AdminLogin> AdminLogins { get; set; }
         public virtual DbSet<UserLogin> UserLogins { get; set; }
+        public virtual DbSet<Complaint> Complaints { get; set; }
     }
 }

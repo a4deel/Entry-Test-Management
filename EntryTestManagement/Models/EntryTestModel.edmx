@@ -29,6 +29,17 @@
           <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="reset" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Complaint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Date" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserEmail" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="UserLogin">
           <Key>
             <PropertyRef Name="id" />
@@ -40,6 +51,7 @@
         <EntityContainer Name="EntryTestDetailsDBModel1StoreContainer">
           <EntitySet Name="AdminData" EntityType="Self.AdminData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdminLogin" EntityType="Self.AdminLogin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Complaint" EntityType="Self.Complaint" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserLogin" EntityType="Self.UserLogin" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -50,6 +62,7 @@
           <EntitySet Name="AdminDatas" EntityType="EntryTestDetailsDBModel1.AdminData" />
           <EntitySet Name="AdminLogins" EntityType="EntryTestDetailsDBModel1.AdminLogin" />
           <EntitySet Name="UserLogins" EntityType="EntryTestDetailsDBModel1.UserLogin" />
+          <EntitySet Name="Complaints" EntityType="EntryTestDetailsDBModel1.Complaint" />
         </EntityContainer>
         <EntityType Name="AdminData">
           <Key>
@@ -82,6 +95,17 @@
           <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Complaint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -121,6 +145,18 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Complaints">
+            <EntityTypeMapping TypeName="EntryTestDetailsDBModel1.Complaint">
+              <MappingFragment StoreEntitySet="Complaint">
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

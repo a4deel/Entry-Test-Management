@@ -1,5 +1,6 @@
 ﻿using EntryTestManagement.Models;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
@@ -21,6 +22,8 @@ namespace EntryTestManagement.Controllers
             {
                 if (Session["AdminReset"].Equals("1"))
                 {
+                    ViewData["TotalAdmins"] = DataStorage.AdminLogins.Count();
+                    ViewData["TotalUsers"] = DataStorage.UserLogins.Count();
                     return View();
                 }
                 else
@@ -145,6 +148,7 @@ namespace EntryTestManagement.Controllers
                         name = Path.GetFileName(admin.ImageFile.FileName);
                         UploadPath = Server.MapPath("~\\Content\\styles\\img\\admins\\" + name);
                         admin.Image = name;
+                        admin.ImageFile.SaveAs(UploadPath);
                     }
                     else
                     {
@@ -159,7 +163,6 @@ namespace EntryTestManagement.Controllers
                     DataStorage.AdminLogins.Add(obj);
                     DataStorage.AdminDatas.Add(admin);
                     DataStorage.SaveChanges();
-                    admin.ImageFile.SaveAs(UploadPath);
 
                     string subject = "Admin Password Reset Invitation";
                     string message = "Your random password is generated. Kindly take a moment and reset it.Without reseting your password you may not be able to access your Sub Admin Account. Your current password is " + pass;
@@ -381,6 +384,74 @@ namespace EntryTestManagement.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult ViewComplaints(int? id)
+        {
+            if (Session["AdminEmail"] != null)
+            {
+                if (id != null)
+                {
+                    var complain = DataStorage.Complaints.Where(obj=>obj.Id == id).FirstOrDefault();
+                    TempData["UserEmail"] = complain.UserEmail;
+                    TempData["UserSubject"] = complain.Subject;
+                    TempData["UserDescription"] = complain.Description;
+                    var complains = DataStorage.Complaints.ToList();
+                    return View(complains);
+                }
+                else
+                {
+                    var complain = DataStorage.Complaints.First();
+                    TempData["UserEmail"] = complain.UserEmail;
+                    TempData["UserSubject"] = complain.Subject;
+                    TempData["UserDescription"] = complain.Description;
+                    var complains = DataStorage.Complaints.ToList();
+                    return View(complains);
+                }
+            }
+            else
+            {
+                TempData["Message"] = "Dear Admin Kindly Login First";
+                return RedirectToAction("AdminLogin");
+            }
+        }
+
+        public ActionResult Resolve(int? id)
+        {
+            if (Session["AdminEmail"] != null)
+            {
+                if (id != null)
+                {
+                    Complaint comp = DataStorage.Complaints.Find(id);
+                    string email = comp.UserEmail;
+                    if (comp != null)
+                    {
+                        comp.Status = "Resolved";
+                        DataStorage.SaveChanges();
+                        string name = "User";
+                        string subject = "User Complaints Resolution Centre";
+                        string message = "Your Complaint has been resolved successfully. Kindly take a moment and review your complain and leave your feedback";
+                        sendEmail(email, subject, message, name);
+                        return RedirectToAction("ViewComplaints");
+                    }
+                    else
+                    {
+                        TempData["Message"] = "Complaint Not Found";
+                        return RedirectToAction("ViewComplaints");
+                    }
+                }
+                else
+                {
+                    TempData["Message"] = "NULL ID is given";
+                    return RedirectToAction("ViewComplaints");
+                }
+            }
+            else
+            {
+                TempData["Message"] = "Dear Admin Kindly Login First";
+                return RedirectToAction("AdminLogin");
+            }
+        }
+
         private string GetMD5(string str)
         {
             MD5 md5 = new MD5CryptoServiceProvider();
@@ -400,7 +471,7 @@ namespace EntryTestManagement.Controllers
         {
             string validChars = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*?_-";
             Random random = new Random();
-            int size = random.Next(8, validChars.Length);
+            int size = random.Next(8, 9);
             char[] chars = new char[size];
             for (int i = 0; i < size; i++)
             {

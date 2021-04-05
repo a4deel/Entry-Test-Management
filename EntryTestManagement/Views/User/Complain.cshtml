@@ -1,0 +1,54 @@
+﻿@model EntryTestManagement.Models.Complaint
+@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<div class="wrapper">
+    <div class="main-panel">
+        <!-- BEGIN : Main Content-->
+        <div class="main-content">
+            <div class="content-wrapper">
+                <!-- Wizard Starts -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="content-header">Complain Form</div>
+                    </div>
+                </div>
+                <section id="icon-tabs" style="margin-right: 250px;">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">User Complaint Box</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        @using (Html.BeginForm("Complain", "User", FormMethod.Post))
+                                        {
+                                            @Html.ValidationSummary(true)
+                                            if (@TempData["Message"] != null)
+                                            {
+                                                <p style="font-size:x-large;" class="badge badge-danger">@TempData["Message"]</p>
+                                            }
+                                            @Html.AntiForgeryToken()
+                                            @Html.TextBoxFor(comp => comp.Subject,"", new { autofocus = "autofocus", @class = "form-control mb-1", @placeholder = "Subject" })
+                                            @Html.ValidationMessageFor(comp => comp.Subject, "", new { @class = "badge badge-danger" })
+                                            @Html.TextAreaFor(comp => comp.Description, new { autofocus = "autofocus", @class = "form-control mb-1", @placeholder = "Description" })
+                                            @Html.ValidationMessageFor(comp => comp.Description, "", new { @class = "badge badge-danger" })
+                                            <hr>
+                                            <div class="fg-actions d-flex justify-content-between">
+                                                <div class="recover-pass">
+                                                    <input type="submit" id="submit" name="submit" class="btn btn-primary" value="Submit Complain" />
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

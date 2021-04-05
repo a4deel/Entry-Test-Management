@@ -1,0 +1,89 @@
+﻿@model List<EntryTestManagement.Models.Complaint>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="main-panel">
+    <!-- BEGIN : Main Content-->
+    <div class="main-content">
+        <div class="content-wrapper">
+            <div class="email-application" style="margin-top: 50px;margin-left: -250px;width: 120%;">
+                <div class="content-overlay"></div>
+                <div class="email-app-content row">
+                    <div class="heading">
+                        <h3>View Complaints</h3>
+                    </div>
+                    @if (@TempData["Message"] != null)
+                    {
+                        <p style="font-size:x-large;" class="badge badge-danger">@TempData["Message"]</p>
+                    }
+                    <div class="email-app-content-area w-100">
+                        <div class="email-app-list-mails p-0">
+                            <div class="email-app-list">
+                                <div id="users-list">
+                                    <div class="list-group">
+                                        <div class="users-list-padding">
+                                            @foreach (var comp in Model)
+                                            {
+                                                    <span class="media" style="margin-left:20px;">
+                                                        <span class="avatar avatar-md mr-2">
+                                                            <span class="media-object rounded-circle text-circle d-flex mr-2 justify-content-center align-items-center bg-info">@comp.UserEmail[0]</span>
+                                                        </span>
+                                                        <div class="media-body">
+                                                            <p class="list-group-item-text text-truncate text-bold-700">
+                                                                <a href="@Url.Action("ViewComplaints","Admin",new {@comp.Id})">
+                                                                    <span>@comp.Subject</span>
+                                                                </a>
+                                                            </p>
+                                                            <h6 class="list-group-item-heading text-bold-400">
+                                                                @comp.UserEmail
+                                                            </h6>
+                                                            <p class="font-small-2 primary">@comp.Date</p>
+                                                            <p class="list-group-item-text">
+                                                                <span class="primary">
+                                                                    @if (@comp.Status.Equals("Pending"))
+                                                                    {
+                                                                        <a href="@Url.Action("Resolve","Admin",new {@comp.Id})">
+                                                                            <span class="badge badge-danger mr-1">@comp.Status</span>
+                                                                        </a>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span class="badge badge-success mr-1">@comp.Status</span>
+                                                                    }
+                                                                </span>
+                                                            </p>
+                                                        </div>
+                                                    </span>
+                                                <hr />
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="email-app-mail-content">
+                            <div class="email-app-mail-content-detail">
+                                <div class="media-list">
+                                        <div class="email-app-title card-body">
+                                            <h3 class="list-group-item-heading">Subject : @TempData["UserSubject"]</h3>
+                                            <h3 class="list-group-item-heading">From : @TempData["UserEmail"]</h3>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="email-app-text card-body">
+                                                <div class="email-app-message">
+                                                    <p> @TempData["UserDescription"]</p>
+                                                    <p>Cheers~</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END : End Main Content-->
+</div>

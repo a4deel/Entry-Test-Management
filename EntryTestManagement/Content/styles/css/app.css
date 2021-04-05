@@ -5571,6 +5571,11 @@ a.badge-dark.focus {
   margin-bottom: 0;
 }
 
+div.users-list-padding {
+overflow-y: scroll;
+ height: 400px;
+}
+
 .list-group-item-action {
   width: 100%;
   color: #495057;
