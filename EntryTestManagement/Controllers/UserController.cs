@@ -62,20 +62,27 @@ namespace EntryTestManagement.Controllers
             }
         }
 
+        public ActionResult Register()
+        {
+            if (Session["UserEmail"] != null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
         public ActionResult Logout()
         {
             Session.Clear();
             return RedirectToAction("Login");
         }
 
-        public ActionResult RegisterUser()
-        {
-            return View();
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult RegisterUser(UserLogin user)
+        public ActionResult Register(UserLogin user)
         {
             if (ModelState.IsValid)
             {

@@ -100,7 +100,7 @@ namespace EntryTestManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult AddAdmin()
+        public ActionResult Add()
         {
             if (Session["AdminEmail"] != null)
             {
@@ -131,7 +131,7 @@ namespace EntryTestManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddAdmin(AdminData admin)
+        public ActionResult Add(AdminData admin)
         {
             if (ModelState.IsValid)
             {
@@ -169,12 +169,12 @@ namespace EntryTestManagement.Controllers
                     sendEmail(admin.email, subject, message, fullName);
                     TempData["Message"] = "New Sub Admin Added Successfully";
 
-                    return RedirectToAction("AddAdmin");
+                    return RedirectToAction("Add");
                 }
                 else
                 {
                     TempData["Message"] = "Admin Already Exists";
-                    return RedirectToAction("AddAdmin");
+                    return RedirectToAction("Add");
                 }
             }
             else
@@ -244,7 +244,7 @@ namespace EntryTestManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult DeleteAdmin(int? id)
+        public ActionResult Delete(int? id)
         {
             if (Session["AdminEmail"] != null)
             {
@@ -279,7 +279,7 @@ namespace EntryTestManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditAdmin(int? id)
+        public ActionResult Edit(int? id)
         {
             if (Session["AdminEmail"] != null)
             {
@@ -310,7 +310,7 @@ namespace EntryTestManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditAdmin(AdminData admin)
+        public ActionResult Edit(AdminData admin)
         {
             if (ModelState.IsValid)
             {

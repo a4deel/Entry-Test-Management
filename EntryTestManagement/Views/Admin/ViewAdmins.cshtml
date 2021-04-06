@@ -57,10 +57,10 @@
                                                     <td>
                                                         @if (@Session["AdminRole"].Equals("Super") && !@admin.Role.Equals("Super"))
                                                         {
-                                                            <a href="@Url.Action("EditAdmin","Admin",new {@admin.id})" style="color:lightgreen;">
+                                                            <a href="@Url.Action("Edit","Admin",new {@admin.id})" style="color:lightgreen;">
                                                                 <i class="ft-edit-2 font-medium-3 mr-2"></i>
                                                             </a>
-                                                            <a href="@Url.Action("DeleteAdmin","Admin",new {@admin.id})" style="color:red;">
+                                                            <a href="@Url.Action("Delete","Admin",new {@admin.id})" style="color:red;">
                                                                 <i class="ft-x font-medium-3 mr-2"></i>
                                                             </a>
                                                         }

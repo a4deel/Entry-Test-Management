@@ -15,7 +15,7 @@
                     <div class="card-content">
                         <div class="px-3">
 
-                            @using (@Html.BeginForm("AddAdmin", "Admin", FormMethod.Post, new { enctype = "multipart/form-data"}))
+                            @using (@Html.BeginForm("Add", "Admin", FormMethod.Post, new { enctype = "multipart/form-data"}))
                             {
                                 @Html.ValidationSummary(true)
                                 if (@TempData["Message"] != null)

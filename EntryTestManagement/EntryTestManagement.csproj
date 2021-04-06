@@ -286,8 +286,8 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Admin\AdminProfile.cshtml" />
-    <Content Include="Views\Admin\AddAdmin.cshtml" />
-    <Content Include="Views\Admin\EditAdmin.cshtml" />
+    <Content Include="Views\Admin\Add.cshtml" />
+    <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Admin\ResetPassword.cshtml" />
     <None Include="Views\Home\index.cshtml" />
     <None Include="Views\Admin\Login.cshtml" />
@@ -304,7 +304,7 @@
     <Content Include="Views\User\Complain.cshtml" />
     <Content Include="Views\Admin\ViewComplaints.cshtml" />
     <None Include="Views\User\Login.cshtml" />
-    <None Include="Views\User\RegisterUser.cshtml" />
+    <None Include="Views\User\Register.cshtml" />
     <None Include="Views\Admin\index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
