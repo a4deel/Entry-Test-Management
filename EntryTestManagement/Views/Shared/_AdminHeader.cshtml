@@ -18,11 +18,17 @@
                 <ul id="main-menu-navigation" data-menu="menu-navigation" data-scroll-to-active="true"
                     class="navigation navigation-main">
                     <li class="nav-item">
+                        <a href="/Admin/Index">
+                            <i class="ft-home"></i><span data-i18n=""
+                                                         class="menu-title">Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         @{ 
                             var id = @Session["AdminID"];
                         }
                         <a href="@Url.Action("AdminProfile","Admin",new {@id})">
-                            <i class="ft-droplet"></i><span data-i18n=""
+                            <i class="ft-user"></i><span data-i18n=""
                                                             class="menu-title">My Profile</span>
                         </a>
                     </li>
@@ -30,38 +36,38 @@
                     {
                         <li class="nav-item">
                             <a href="@Url.Action("Add","Admin")">
-                                <i class="ft-droplet"></i><span data-i18n=""
+                                <i class="ft-edit"></i><span data-i18n=""
                                                                 class="menu-title">Add Admin</span>
                             </a>
                         </li>
                     }
                     <li class="nav-item">
                         <a href="@Url.Action("ViewAdmins","Admin")">
-                            <i class="ft-droplet"></i><span data-i18n=""
+                            <i class="ft-grid"></i><span data-i18n=""
                                                             class="menu-title">View Admins</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#">
-                            <i class="ft-droplet"></i><span data-i18n=""
+                            <i class="ft-layout"></i><span data-i18n=""
                                                             class="menu-title">View Candidates</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#">
-                            <i class="ft-mail"></i><span data-i18n=""
+                            <i class="ft-message-square"></i><span data-i18n=""
                                                          class="menu-title">Check Status</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#">
-                            <i class="ft-message-square"></i><span data-i18n=""
+                            <i class="ft-book"></i><span data-i18n=""
                                                                    class="menu-title">Issue Roll Number</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="/Admin/ViewComplaints">
-                            <i class="ft-file-text"></i><span data-i18n=""
+                            <i class="ft-mail"></i><span data-i18n=""
                                                               class="menu-title">View Complaints</span>
                         </a>
                     </li>

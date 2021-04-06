@@ -23,23 +23,29 @@
                 <ul id="main-menu-navigation" data-menu="menu-navigation" data-scroll-to-active="true"
                     class="navigation navigation-main">
                     <li class="nav-item">
+                        <a href="/User/Index">
+                            <i class="ft-home"></i><span data-i18n=""
+                                                         class="menu-title">Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         @{
                             var id = @Session["UserID"];
                         }
                         <a href="#">
-                            <i class="ft-droplet"></i><span data-i18n=""
+                            <i class="ft-user"></i><span data-i18n=""
                                                             class="menu-title">My Profile</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#">
-                            <i class="ft-droplet"></i><span data-i18n=""
+                            <i class="ft-edit"></i><span data-i18n=""
                                                             class="menu-title">Edit Profile</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#">
-                            <i class="ft-droplet"></i><span data-i18n=""
+                            <i class="ft-book"></i><span data-i18n=""
                                                             class="menu-title">Challan Form</span>
                         </a>
                     </li>
@@ -51,7 +57,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="/User/Complain">
-                            <i class="ft-message-square"></i><span data-i18n=""
+                            <i class="ft-mail"></i><span data-i18n=""
                                                                    class="menu-title">Register Complain</span>
                         </a>
                     </li>
