@@ -19,11 +19,11 @@ namespace EntryTestManagement.Controllers
             }
             else
             {
-                return RedirectToAction("UserLogin");
+                return RedirectToAction("Login");
             }
         }
 
-        public ActionResult UserLogin()
+        public ActionResult Login()
         {
             if (Session["UserEmail"] != null)
             {
@@ -37,7 +37,7 @@ namespace EntryTestManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UserLogin(UserLogin user)
+        public ActionResult Login(UserLogin user)
         {
             if (ModelState.IsValid)
             {
@@ -53,7 +53,7 @@ namespace EntryTestManagement.Controllers
                 else
                 {
                     TempData["Message"] = "*Incorrect Email/Password";
-                    return RedirectToAction("UserLogin");
+                    return RedirectToAction("Login");
                 }
             }
             else
@@ -65,7 +65,7 @@ namespace EntryTestManagement.Controllers
         public ActionResult Logout()
         {
             Session.Clear();
-            return RedirectToAction("UserLogin");
+            return RedirectToAction("Login");
         }
 
         public ActionResult RegisterUser()
@@ -86,7 +86,7 @@ namespace EntryTestManagement.Controllers
                     DataStorage.Configuration.ValidateOnSaveEnabled = false;
                     DataStorage.UserLogins.Add(user);
                     DataStorage.SaveChanges();
-                    return RedirectToAction("UserLogin");
+                    return RedirectToAction("Login");
                 }
                 else
                 {
@@ -110,7 +110,7 @@ namespace EntryTestManagement.Controllers
             else
             {
                 TempData["Message"] = "Dear User Kindly Login First";
-                return RedirectToAction("UserLogin");
+                return RedirectToAction("Login");
             }
         }
 

@@ -18,7 +18,7 @@ namespace EntryTestManagement.Models
         public string email { get; set; }
 
         [Required(ErrorMessage = "Password is Required")]
-        [RegularExpression("^(?=.*\\d).{8,}$", ErrorMessage = "Password Length should be atleast 8")]
+        [RegularExpression("^.{8,}$", ErrorMessage = "Password Length should be atleast 8")]
         public string password { get; set; }
         public int id { get; set; }
     }

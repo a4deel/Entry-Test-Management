@@ -290,7 +290,7 @@
     <Content Include="Views\Admin\EditAdmin.cshtml" />
     <Content Include="Views\Admin\ResetPassword.cshtml" />
     <None Include="Views\Home\index.cshtml" />
-    <None Include="Views\Admin\AdminLogin.cshtml" />
+    <None Include="Views\Admin\Login.cshtml" />
     <None Include="Views\Admin\ViewAdmins.cshtml" />
     <Content Include="Views\User\index.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
@@ -303,7 +303,8 @@
     <Content Include="Views\Shared\_UserHeader.cshtml" />
     <Content Include="Views\User\Complain.cshtml" />
     <Content Include="Views\Admin\ViewComplaints.cshtml" />
-    <None Include="Views\User\UserLogin.cshtml" />
+    <Content Include="Views\Shared\_UserFooter.cshtml" />
+    <None Include="Views\User\Login.cshtml" />
     <None Include="Views\User\RegisterUser.cshtml" />
     <None Include="Views\Admin\index.cshtml" />
     <Content Include="Web.config" />

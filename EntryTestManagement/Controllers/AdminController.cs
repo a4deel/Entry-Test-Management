@@ -35,12 +35,12 @@ namespace EntryTestManagement.Controllers
             else
             {
                 TempData["Message"] = "Dear Admin Kindly Login First";
-                return RedirectToAction("AdminLogin");
+                return RedirectToAction("Login");
             }
 
         }
 
-        public ActionResult AdminLogin()
+        public ActionResult Login()
         {
             if (Session["AdminEmail"] != null)
             {
@@ -54,7 +54,7 @@ namespace EntryTestManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AdminLogin(AdminLogin admin)
+        public ActionResult Login(AdminLogin admin)
         {
             if (ModelState.IsValid)
             {
@@ -84,7 +84,7 @@ namespace EntryTestManagement.Controllers
                 else
                 {
                     TempData["Message"] = "*Incorrect Email/Password";
-                    return RedirectToAction("AdminLogin");
+                    return RedirectToAction("Login");
                 }
             }
             else
@@ -96,7 +96,7 @@ namespace EntryTestManagement.Controllers
         public ActionResult Logout()
         {
             Session.Clear();
-            return RedirectToAction("AdminLogin");
+            return RedirectToAction("Login");
         }
 
         [HttpGet]
@@ -125,7 +125,7 @@ namespace EntryTestManagement.Controllers
             else
             {
                  TempData["Message"] = "Dear Admin Kindly Login First";
-                return RedirectToAction("AdminLogin");
+                return RedirectToAction("Login");
             }
         }
 
@@ -200,7 +200,7 @@ namespace EntryTestManagement.Controllers
             else
             {
                  TempData["Message"] = "Dear Admin Kindly Login First";
-                return RedirectToAction("AdminLogin");
+                return RedirectToAction("Login");
             }
         }
 
@@ -239,7 +239,7 @@ namespace EntryTestManagement.Controllers
             else
             {
                  TempData["Message"] = "Dear Admin Kindly Login First";
-                return RedirectToAction("AdminLogin");
+                return RedirectToAction("Login");
             }
         }
 
@@ -251,11 +251,11 @@ namespace EntryTestManagement.Controllers
                 if (id != null && Session["AdminRole"].Equals("Super"))
                 {
                     AdminData adminData = DataStorage.AdminDatas.Find(id);
-                    AdminLogin adminLogin = DataStorage.AdminLogins.Find(id);
-                    if (adminData != null && adminLogin != null)
+                    AdminLogin Login = DataStorage.AdminLogins.Find(id);
+                    if (adminData != null && Login != null)
                     {
                         DataStorage.AdminDatas.Remove(adminData);
-                        DataStorage.AdminLogins.Remove(adminLogin);
+                        DataStorage.AdminLogins.Remove(Login);
                         DataStorage.SaveChanges();
                         return RedirectToAction("ViewAdmins");
                     }
@@ -274,7 +274,7 @@ namespace EntryTestManagement.Controllers
             else
             {
                 TempData["Message"] = "Dear Admin Kindly Login First";
-                return RedirectToAction("AdminLogin");
+                return RedirectToAction("Login");
             }
         }
 
@@ -305,7 +305,7 @@ namespace EntryTestManagement.Controllers
             else
             {
                  TempData["Message"] = "Dear Admin Kindly Login First";
-                 return RedirectToAction("AdminLogin");
+                 return RedirectToAction("Login");
             }
         }
 
@@ -357,7 +357,7 @@ namespace EntryTestManagement.Controllers
             else
             {
                  TempData["Message"] = "Dear Admin Kindly Login First";
-                return RedirectToAction("AdminLogin");
+                return RedirectToAction("Login");
             }
         }
 
@@ -375,7 +375,7 @@ namespace EntryTestManagement.Controllers
                 DataStorage.SaveChanges();
                 Session.Clear();
                 TempData["Message"] = "Password Reset Successful";
-                return RedirectToAction("AdminLogin");
+                return RedirectToAction("Login");
             }
             else
             {
@@ -391,12 +391,25 @@ namespace EntryTestManagement.Controllers
             {
                 if (id != null)
                 {
-                    var complain = DataStorage.Complaints.Where(obj=>obj.Id == id).FirstOrDefault();
-                    TempData["UserEmail"] = complain.UserEmail;
-                    TempData["UserSubject"] = complain.Subject;
-                    TempData["UserDescription"] = complain.Description;
-                    var complains = DataStorage.Complaints.ToList();
-                    return View(complains);
+                    var complain = DataStorage.Complaints.Find(id);
+                    if(complain != null)
+                    {
+                        TempData["UserEmail"] = complain.UserEmail;
+                        TempData["UserSubject"] = complain.Subject;
+                        TempData["UserDescription"] = complain.Description;
+                        var complains = DataStorage.Complaints.ToList();
+                        return View(complains);
+                    }
+                    else
+                    {
+                        var comp = DataStorage.Complaints.First();
+                        TempData["UserEmail"] = comp.UserEmail;
+                        TempData["UserSubject"] = comp.Subject;
+                        TempData["UserDescription"] = comp.Description;
+                        TempData["Message"] = "Admin with ID : "+id+" Not Found";
+                        var complains = DataStorage.Complaints.ToList();
+                        return View(complains);
+                    }
                 }
                 else
                 {
@@ -411,7 +424,7 @@ namespace EntryTestManagement.Controllers
             else
             {
                 TempData["Message"] = "Dear Admin Kindly Login First";
-                return RedirectToAction("AdminLogin");
+                return RedirectToAction("Login");
             }
         }
 
@@ -448,7 +461,7 @@ namespace EntryTestManagement.Controllers
             else
             {
                 TempData["Message"] = "Dear Admin Kindly Login First";
-                return RedirectToAction("AdminLogin");
+                return RedirectToAction("Login");
             }
         }
 
