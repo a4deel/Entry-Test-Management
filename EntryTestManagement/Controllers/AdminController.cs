@@ -40,6 +40,8 @@ namespace EntryTestManagement.Controllers
 
         }
 
+        //Login Functionality
+        [HttpGet]
         public ActionResult Login()
         {
             if (Session["AdminEmail"] != null)
@@ -93,12 +95,14 @@ namespace EntryTestManagement.Controllers
             }
         }
 
+        //Logout Functionality
         public ActionResult Logout()
         {
             Session.Clear();
             return RedirectToAction("Login");
         }
 
+        //Add New Admin
         [HttpGet]
         public ActionResult Add()
         {
@@ -169,7 +173,7 @@ namespace EntryTestManagement.Controllers
                     sendEmail(admin.email, subject, message, fullName);
                     TempData["Message"] = "New Sub Admin Added Successfully";
 
-                    return RedirectToAction("Add");
+                    return RedirectToAction("ViewAdmins");
                 }
                 else
                 {
@@ -182,6 +186,8 @@ namespace EntryTestManagement.Controllers
                 return View(admin);
             }
         }
+
+        //View All Admins
         public ActionResult ViewAdmins()
         {
             if (Session["AdminEmail"] != null)
@@ -204,6 +210,7 @@ namespace EntryTestManagement.Controllers
             }
         }
 
+        //View Single Admin
         [HttpGet]
         public ActionResult AdminProfile(int? id)
         {
@@ -243,6 +250,7 @@ namespace EntryTestManagement.Controllers
             }
         }
 
+        //Delete Admin
         [HttpGet]
         public ActionResult Delete(int? id)
         {
@@ -278,6 +286,7 @@ namespace EntryTestManagement.Controllers
             }
         }
 
+        //Edit Admins
         [HttpGet]
         public ActionResult Edit(int? id)
         {
@@ -339,6 +348,7 @@ namespace EntryTestManagement.Controllers
             }
         }
 
+        //Admin Reset Password
         [HttpGet]
         public ActionResult ResetPassword()
         {
@@ -384,6 +394,7 @@ namespace EntryTestManagement.Controllers
             }
         }
 
+        //View All Complaints
         [HttpGet]
         public ActionResult ViewComplaints(int? id)
         {
@@ -428,6 +439,7 @@ namespace EntryTestManagement.Controllers
             }
         }
 
+        //Resolve complains
         public ActionResult Resolve(int? id)
         {
             if (Session["AdminEmail"] != null)
