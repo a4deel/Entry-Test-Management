@@ -5,10 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="8ccbe63a77af465a97d73b7f5fe6457a" Name="Diagram1">
-        <EntityTypeShape EntityType="EntryTestDetailsDBModel1.AdminData" Width="1.5" PointX="1" PointY="0.75" />
-        <EntityTypeShape EntityType="EntryTestDetailsDBModel1.AdminLogin" Width="1.5" PointX="3" PointY="0.75" />
-        <EntityTypeShape EntityType="EntryTestDetailsDBModel1.UserLogin" Width="1.5" PointX="4.875" PointY="0.75" />
-        <EntityTypeShape EntityType="EntryTestDetailsDBModel1.Complaint" Width="1.5" PointX="6.875" PointY="0.75" />
+        <EntityTypeShape EntityType="EntryTestDetailsDBModel1.AdminData" Width="1.5" PointX="0.5" PointY="0.625" />
+        <EntityTypeShape EntityType="EntryTestDetailsDBModel1.AdminLogin" Width="1.5" PointX="2.25" PointY="0.625" />
+        <EntityTypeShape EntityType="EntryTestDetailsDBModel1.UserLogin" Width="1.5" PointX="4" PointY="0.625" />
+        <EntityTypeShape EntityType="EntryTestDetailsDBModel1.Complaint" Width="1.5" PointX="5.625" PointY="0.625" />
+        <EntityTypeShape EntityType="EntryTestDetailsDBModel1.UserData" Width="1.5" PointX="7.375" PointY="0.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

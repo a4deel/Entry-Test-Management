@@ -139,6 +139,19 @@ namespace EntryTestManagement.Controllers
             }
         }
 
+        public ActionResult Add()
+        {
+            if (Session["UserEmail"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["Message"] = "Dear User Kindly Login First";
+                return RedirectToAction("Login");
+            }
+        }
+
         private string GetMD5(string str)
         {
             MD5 md5 = new MD5CryptoServiceProvider();

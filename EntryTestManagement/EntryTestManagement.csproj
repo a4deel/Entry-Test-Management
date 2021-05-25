@@ -232,6 +232,9 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\UserData.cs">
+      <DependentUpon>EntryTestModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UserLogin.cs">
       <DependentUpon>EntryTestModel.tt</DependentUpon>
     </Compile>
@@ -303,6 +306,7 @@
     <Content Include="Views\Shared\_UserHeader.cshtml" />
     <Content Include="Views\User\Complain.cshtml" />
     <Content Include="Views\Admin\ViewComplaints.cshtml" />
+    <Content Include="Views\User\Add.cshtml" />
     <None Include="Views\User\Login.cshtml" />
     <None Include="Views\User\Register.cshtml" />
     <None Include="Views\Admin\index.cshtml" />
