@@ -10,6 +10,14 @@
         <div class="content-wrapper">
             <div class="col-sm-12">
                 <div class="card">
+                    <div class="message">
+                        <p class="badge badge-primary">@UserName Welcome To Dashboard</p>
+                    </div>
+                    @if (@TempData["Message"] != null)
+                    {
+                        <p style="font-size:x-large;" class="badge badge-danger">@TempData["Message"]</p>
+                    }
+                    <hr />
                     <div class="card-header">
                         <h2 class="card-title">Faculty of Computing & Information Technology</h2>
                     </div>
@@ -20,7 +28,14 @@
                             </div>
                             <hr />
                             <div class="recover-pass" style="margin-left:5.5rem;">
-                                <a href="@Url.Action("Add","User")" class="btn btn-primary text-decoration-none text-white">Register Your Personal Information</a>
+                                @if(Session["Added"]!= null)
+                                {
+                                    <a href="@Url.Action("Challan","User")" class="btn btn-primary text-decoration-none text-white">View Challan Form</a>
+                                }
+                                else if (Session["Added"] == null)
+                                {
+                                    <a href="@Url.Action("Add","User")" class="btn btn-primary text-decoration-none text-white">Register Your Personal Information</a>
+                                }
                             </div>
                         </div>
                     </div>

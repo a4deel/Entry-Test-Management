@@ -18,8 +18,6 @@ namespace EntryTestManagement.Models
     {
         public int id { get; set; }
 
-        [Required(ErrorMessage = "Email is Required")]
-        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Invalid Email Format")]
         public string email { get; set; }
 
         [Required(ErrorMessage = "First Name is Required")]
@@ -52,6 +50,9 @@ namespace EntryTestManagement.Models
         public string Age { get; set; }
 
         public string Status { get; set; }
+
+        [Required(ErrorMessage = "Image is Required")]
         public HttpPostedFileBase ImageFile { get; set; }
+        public string ChallanNo { get; set; }
     }
 }

@@ -1,0 +1,109 @@
+﻿@model EntryTestManagement.Models.UserData
+
+@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+<div class="main-panel">
+    <!-- BEGIN : Main Content-->
+    <div class="main-content">
+        <div class="content-wrapper">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title" id="basic-layout-colored-form-control">Edit user</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="px-3">
+                            @using (@Html.BeginForm("EditUser", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                { @Session["Image"] = @Model.Image.ToString();}
+                                    @Html.ValidationSummary(true)
+                                    if (@TempData["Message"] != null)
+                                    {
+                                    <p style="color:red !important;font-size:x-large;">@TempData["Message"]</p>
+                                    }
+                                @Html.AntiForgeryToken()
+                                <div class="form-body">
+                                    <h4 class="form-section"><i class="ft-info"></i> About User</h4>
+                                    @Html.HiddenFor(model => model.id)
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="userinput1">First Name</label>
+                                                @Html.TextBoxFor(user => user.FirstName, "", new { autofocus = "autofocus", @class = "form-control mb-1" })
+                                                @Html.ValidationMessageFor(user => user.FirstName, "", new { @class = "badge badge-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="userinput2">Last Name</label>
+                                                @Html.TextBoxFor(user => user.LastName, "", new { @class = "form-control mb-1" })
+                                                @Html.ValidationMessageFor(user => user.LastName, "", new { @class = "badge badge-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="userinput4">Gender</label>
+                                                @Html.TextBoxFor(user => user.Gender, "", new { @class = "form-control mb-1" })
+                                                @Html.ValidationMessageFor(user => user.Gender, "", new { @class = "badge badge-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="userinput2">Profile Image</label>
+                                                @Html.TextBoxFor(user => user.ImageFile, "", new { @type = "file", @class = "form-control mb-1" })
+                                                @Html.ValidationMessageFor(user => user.ImageFile, "", new { @class = "badge badge-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="form-section"><i class="ft-mail"></i> Contact Info & Bio</h4>
+
+                                    <div class="form-group">
+                                        <label for="userinput5">Age</label>
+                                        @Html.TextBoxFor(user => user.Age, "", new { @class = "form-control mb-1" })
+                                        @Html.ValidationMessageFor(user => user.Age, "", new { @class = "badge badge-danger" })
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="userinput3">CNIC</label>
+                                        @Html.TextBoxFor(user => user.CNIC, "", new { @class = "form-control mb-1" })
+                                        @Html.ValidationMessageFor(user => user.CNIC, "", new { @class = "badge badge-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="userinput5">Contact Number</label>
+                                        @Html.TextBoxFor(user => user.Contact, "", new { @class = "form-control mb-1" })
+                                        @Html.ValidationMessageFor(user => user.Contact, "", new { @class = "badge badge-danger" })
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="userinput5">Address</label>
+                                        @Html.TextBoxFor(user => user.Address, "", new { @class = "form-control mb-1" })
+                                        @Html.ValidationMessageFor(user => user.Address, "", new { @class = "badge badge-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-actions right">
+                                    <button type="reset" class="btn btn-raised btn-warning mr-1">
+                                        <i class="ft-x"></i> Reset
+                                    </button>
+                                </div>
+                                <div class="recover-pass">
+                                    <input type="submit" id="submit" name="submit" class="btn btn-raised btn-primary mr-1" value="Update user">
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END : End Main Content-->
+</div>
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>

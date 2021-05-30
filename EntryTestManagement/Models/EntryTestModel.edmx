@@ -57,6 +57,7 @@
           <Property Name="Age" Type="nvarchar" MaxLength="50" />
           <Property Name="Address" Type="nvarchar(max)" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="ChallanNo" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="UserLogin">
           <Key>
@@ -144,6 +145,7 @@
           <Property Name="Age" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ChallanNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -201,6 +203,7 @@
           <EntitySetMapping Name="UserDatas">
             <EntityTypeMapping TypeName="EntryTestDetailsDBModel1.UserData">
               <MappingFragment StoreEntitySet="UserData">
+                <ScalarProperty Name="ChallanNo" ColumnName="ChallanNo" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Age" ColumnName="Age" />

@@ -23,7 +23,10 @@ namespace EntryTestManagement.Controllers
                 if (Session["AdminReset"].Equals("1"))
                 {
                     ViewData["TotalAdmins"] = DataStorage.AdminLogins.Count();
-                    ViewData["TotalUsers"] = DataStorage.UserLogins.Count();
+                    ViewData["TotalUsers"] = DataStorage.UserDatas.Count();
+                    ViewData["Challans"] = DataStorage.UserDatas.Where(obj => obj.Status.Equals("Paid")).Count();
+                    ViewData["TotalComplains"] = DataStorage.Complaints.Count();
+                    ViewData["ResolvedComplains"] = DataStorage.Complaints.Where(obj => obj.Status.Equals("Resolved")).Count();
                     return View();
                 }
                 else
@@ -319,7 +322,7 @@ namespace EntryTestManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(AdminData admin)
+        public ActionResult EditAdmin(AdminData admin)
         {
             if (ModelState.IsValid)
             {

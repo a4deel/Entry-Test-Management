@@ -10,12 +10,12 @@
                     <span class="text align-middle">PUCIT</span>
                 </a>
                 <a id="sidebarToggle" href="javascript:;"
-                       class="nav-toggle d-none d-sm-none d-md-none d-lg-block">
+                   class="nav-toggle d-none d-sm-none d-md-none d-lg-block">
                     <i data-toggle="expanded"
                        class="toggle-icon ft-toggle-right"></i>
                 </a>
                 <a id="sidebarClose" href="javascript:;"
-                       class="nav-close d-block d-md-block d-lg-none d-xl-none"><i class="ft-x"></i></a>
+                   class="nav-close d-block d-md-block d-lg-none d-xl-none"><i class="ft-x"></i></a>
             </div>
         </div>
         <div class="sidebar-content">
@@ -28,37 +28,40 @@
                                                          class="menu-title">Home</span>
                         </a>
                     </li>
+                    @{
+                        if (Session["UserID"].ToString() != null)
+                        {
+                            var id = Session["UserID"];
+                            <li class="nav-item">
+                                <a href="@Url.Action("UserProfile","User",new {@id})">
+                                    <i class="ft-user"></i><span data-i18n=""
+                                                                 class="menu-title">My Profile</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Edit","User",new {@id})">
+                                    <i class="ft-edit"></i><span data-i18n=""
+                                                                 class="menu-title">Edit Profile</span>
+                                </a>
+                            </li>
                     <li class="nav-item">
-                        @{
-                            var id = @Session["UserID"];
-                        }
-                        <a href="#">
-                            <i class="ft-user"></i><span data-i18n=""
-                                                            class="menu-title">My Profile</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#">
-                            <i class="ft-edit"></i><span data-i18n=""
-                                                            class="menu-title">Edit Profile</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#">
+                        <a href="/User/Challan">
                             <i class="ft-book"></i><span data-i18n=""
-                                                            class="menu-title">Challan Form</span>
+                                                         class="menu-title">Challan Form</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#">
+                        <a href="/User/RollNumberSlip">
                             <i class="ft-message-square"></i><span data-i18n=""
                                                                    class="menu-title">Roll Number Slip</span>
                         </a>
                     </li>
+                        }
+                    }
                     <li class="nav-item">
                         <a href="/User/Complain">
                             <i class="ft-mail"></i><span data-i18n=""
-                                                                   class="menu-title">Register Complain</span>
+                                                         class="menu-title">Register Complain</span>
                         </a>
                     </li>
                 </ul>

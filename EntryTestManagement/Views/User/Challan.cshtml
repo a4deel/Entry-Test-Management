@@ -1,0 +1,182 @@
+﻿@model EntryTestManagement.Models.UserData
+@{
+    Layout = "~/Views/Shared/_ChallanRollLayout.cshtml";
+    var Name = @Model.FirstName + " " + @Model.LastName;
+    var dateTime = DateTime.Now;
+    var shortDateValue = dateTime.ToShortDateString();
+}
+
+<center>
+    <div id="grid">
+        <div class="row wrapper">
+            <div class="challan col-lg-3" id="challan">
+                <div class="challan1" id="challan1">
+                    <center><h5>Punjab University College of Information Technology</h5></center><br />
+                    <center><b>Depositor's Copy</b></center>
+                    <center><b>Habib Bank Limited</b></center><br/>
+                    <center><b>Credit: Admission Income</b></center>
+                    <center><b>Account Number: 00427991775503</b></center>
+                    <center><b>Challan No : @Model.ChallanNo</b></center><br />
+                    <center><b>CNIC No : @Model.CNIC</b></center>
+                    <center><b>Date : @shortDateValue</b></center>
+                    <center><b>Name : @Name</b></center>
+                    <center><b>Campus : New</b></center>
+                    <center><b>Department : F.C.I.T</b></center>
+                    <table style="padding-left: 10px; padding-right: 10px; width: 90%; margin-top: 20px;"
+                           align="center">
+                        <tr style="padding-left: 10px; padding-right: 10px;">
+                            <td style="border: 1px solid black; padding-left:4px;padding-right:4px; width: 150px;">
+                                Admission processing Fee
+                            </td>
+                            <td style="border: 1px solid black; padding-left:4px;padding-right:4px; width: 90px;text-align: center;">
+                                RS. 3000
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid black; padding-left:4px;padding-right:4px; width: 150px;">
+                                <b>Total</b>
+                            </td>
+                            <td style="border: 1px solid black; padding-left:4px;padding-right:4px; width: 90px;text-align: center;">
+                                <b>Rs. 3000</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <b>Total (Rs. in Words): three thousand only.</b>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/><br/><br/><br/><br/><br/><br/>
+                    <p style="text-align: left; padding-left: 5px;">S.No ________ Officer CASHIER</p>
+                </div>
+            </div>
+            <div class="challan col-lg-3" id="challan">
+                <div class="challan1" id="challan1">
+                    <center><h5>Punjab University College of Information Technology</h5></center><br />
+                    <center><b>Accounts FCIT Copy </b></center>
+                    <center><b>Habib Bank Limited</b></center><br />
+                    <center><b>Credit: Admission Income</b></center>
+                    <center><b>Account Number: 00427991775503</b></center>
+                    <center><b>Challan No : @Model.ChallanNo</b></center><br />
+                    <center><b>CNIC No : @Model.CNIC</b></center>
+                    <center><b>Date : @shortDateValue</b></center>
+                    <center><b>Name : @Name</b></center>
+                    <center><b>Campus : New</b></center>
+                    <center><b>Department : F.C.I.T</b></center>
+                    <table style="padding-left: 10px; padding-right: 10px; width: 90%; margin-top: 20px;"
+                           align="center">
+                        <tr style="padding-left: 10px; padding-right: 10px;">
+                            <td style="border: 1px solid black; padding-left:4px;padding-right:4px; width: 150px;">
+                                Admission processing Fee
+                            </td>
+                            <td style="border: 1px solid black; padding-left:4px;padding-right:4px; width: 90px;text-align: center;">
+                                RS. 3000
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid black; padding-left:4px;padding-right:4px; width: 150px;">
+                                <b>Total</b>
+                            </td>
+                            <td style="border: 1px solid black; padding-left:4px;padding-right:4px; width: 90px;text-align: center;">
+                                <b>Rs. 3000</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <b>Total (Rs. in Words): three thousand only.</b>
+                            </td>
+                        </tr>
+                    </table>
+                    <br /><br /><br /><br /><br /><br /><br />
+                    <p style="text-align: left; padding-left: 5px;">S.No ________ Officer CASHIER</p>
+                </div>
+            </div>
+            <div class="challan col-lg-3" id="challan">
+                <div class="challan1" id="challan1">
+                    <center><h5>Punjab University College of Information Technology</h5></center><br />
+                    <center><b>Tution Fee Clerk Copy</b></center>
+                    <center><b>Habib Bank Limited</b></center><br />
+                    <center><b>Credit: Admission Income</b></center>
+                    <center><b>Account Number: 00427991775503</b></center>
+                    <center><b>Challan No : @Model.ChallanNo</b></center><br />
+                    <center><b>CNIC No : @Model.CNIC</b></center>
+                    <center><b>Date : @shortDateValue</b></center>
+                    <center><b>Name : @Name</b></center>
+                    <center><b>Campus : New</b></center>
+                    <center><b>Department : F.C.I.T</b></center>
+                    <table style="padding-left: 10px; padding-right: 10px; width: 90%; margin-top: 20px;"
+                           align="center">
+                        <tr style="padding-left: 10px; padding-right: 10px;">
+                            <td style="border: 1px solid black; padding-left:4px;padding-right:4px; width: 150px;">
+                                Admission processing Fee
+                            </td>
+                            <td style="border: 1px solid black; padding-left:4px;padding-right:4px; width: 90px;text-align: center;">
+                                RS. 3000
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid black; padding-left:4px;padding-right:4px; width: 150px;">
+                                <b>Total</b>
+                            </td>
+                            <td style="border: 1px solid black; padding-left:4px;padding-right:4px; width: 90px;text-align: center;">
+                                <b>Rs. 3000</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <b>Total (Rs. in Words): three thousand only.</b>
+                            </td>
+                        </tr>
+                    </table>
+                    <br /><br /><br /><br /><br /><br /><br />
+                    <p style="text-align: left; padding-left: 5px;">S.No ________ Officer CASHIER</p>
+                </div>
+            </div>
+            <div class="challan col-lg-3" id="challan">
+                <div class="challan1" id="challan1">
+                    <center><h5>Punjab University College of Information Technology</h5></center><br />
+                    <center><b>Bank Copy</b></center>
+                    <center><b>Habib Bank Limited</b></center><br />
+                    <center><b>Credit: Admission Income</b></center>
+                    <center><b>Account Number: 00427991775503</b></center>
+                    <center><b>Challan No : @Model.ChallanNo</b></center><br />
+                    <center><b>CNIC No : @Model.CNIC</b></center>
+                    <center><b>Date : @shortDateValue</b></center>
+                    <center><b>Name : @Name</b></center>
+                    <center><b>Campus : New</b></center>
+                    <center><b>Department : F.C.I.T</b></center>
+                    <table style="padding-left: 10px; padding-right: 10px; width: 90%; margin-top: 20px;"
+                           align="center">
+                        <tr style="padding-left: 10px; padding-right: 10px;">
+                            <td style="border: 1px solid black; padding-left:4px;padding-right:4px; width: 150px;">
+                                Admission processing Fee
+                            </td>
+                            <td style="border: 1px solid black; padding-left:4px;padding-right:4px; width: 90px;text-align: center;">
+                                RS. 3000
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid black; padding-left:4px;padding-right:4px; width: 150px;">
+                                <b>Total</b>
+                            </td>
+                            <td style="border: 1px solid black; padding-left:4px;padding-right:4px; width: 90px;text-align: center;">
+                                <b>Rs. 3000</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <b>Total (Rs. in Words): three thousand only.</b>
+                            </td>
+                        </tr>
+                    </table>
+                    <br /><br /><br /><br /><br /><br /><br />
+                    <p style="text-align: left; padding-left: 5px;">S.No ________ Officer CASHIER</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="recover-pass">
+        <a href="@Url.Action("index","User")" class="btn btn-primary text-decoration-none text-white">Back To Home</a>
+    </div>
+</center>
