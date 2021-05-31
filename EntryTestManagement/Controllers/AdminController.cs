@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -111,7 +112,7 @@ namespace EntryTestManagement.Controllers
         {
             if (Session["AdminEmail"] != null)
             {
-                if(Session["AdminRole"].Equals("Super"))
+                if (Session["AdminRole"].Equals("Super"))
                 {
                     if (Session["AdminReset"].Equals("1"))
                     {
@@ -131,7 +132,7 @@ namespace EntryTestManagement.Controllers
             }
             else
             {
-                 TempData["Message"] = "Dear Admin Kindly Login First";
+                TempData["Message"] = "Dear Admin Kindly Login First";
                 return RedirectToAction("Login");
             }
         }
@@ -159,7 +160,8 @@ namespace EntryTestManagement.Controllers
                     }
                     else
                     {
-                        admin.Image = "user.png";
+                        TempData["Message"] = "Image Not Uploaded";
+                        return RedirectToAction("Add");
                     }
                     string pass = RandomPassword();
                     AdminLogin obj = new AdminLogin
@@ -208,7 +210,30 @@ namespace EntryTestManagement.Controllers
             }
             else
             {
-                 TempData["Message"] = "Dear Admin Kindly Login First";
+                TempData["Message"] = "Dear Admin Kindly Login First";
+                return RedirectToAction("Login");
+            }
+        }
+
+        //View All Users
+        public ActionResult ViewUsers()
+        {
+            if (Session["AdminEmail"] != null)
+            {
+                if (Session["AdminReset"].Equals("1"))
+                {
+                    var users = DataStorage.UserDatas.ToList();
+                    return View(users);
+                }
+                else
+                {
+                    TempData["Message"] = "Kindly Reset Password First";
+                    return RedirectToAction("ResetPassword");
+                }
+            }
+            else
+            {
+                TempData["Message"] = "Dear Admin Kindly Login First";
                 return RedirectToAction("Login");
             }
         }
@@ -248,14 +273,46 @@ namespace EntryTestManagement.Controllers
             }
             else
             {
-                 TempData["Message"] = "Dear Admin Kindly Login First";
+                TempData["Message"] = "Dear Admin Kindly Login First";
+                return RedirectToAction("Login");
+            }
+        }
+
+        //View Single user
+        [HttpGet]
+        public ActionResult UserProfile(int? id)
+        {
+            if (Session["AdminEmail"] != null)
+            {
+                if (id != null)
+                {
+                    var user = DataStorage.UserDatas.Find(id);
+                    if (user != null)
+                    {
+                        return View(user);
+                    }
+                    else
+                    {
+                        TempData["Message"] = "User Not Found";
+                        return RedirectToAction("ViewUsers");
+                    }
+                }
+                else
+                {
+                    TempData["Message"] = "NULL ID is given";
+                    return RedirectToAction("ViewUsers");
+                }
+            }
+            else
+            {
+                TempData["Message"] = "Dear Admin Kindly Login First";
                 return RedirectToAction("Login");
             }
         }
 
         //Delete Admin
         [HttpGet]
-        public ActionResult Delete(int? id)
+        public ActionResult DeleteAdmin(int? id)
         {
             if (Session["AdminEmail"] != null)
             {
@@ -280,6 +337,42 @@ namespace EntryTestManagement.Controllers
                 {
                     TempData["Message"] = "NULL ID is given/Only Super Admin Can Perform This Operation";
                     return RedirectToAction("ViewAdmins");
+                }
+            }
+            else
+            {
+                TempData["Message"] = "Dear Admin Kindly Login First";
+                return RedirectToAction("Login");
+            }
+        }
+
+        //Delete User
+        [HttpGet]
+        public ActionResult DeleteUser(int? id)
+        {
+            if (Session["AdminEmail"] != null)
+            {
+                if (id != null)
+                {
+                    UserData userData = DataStorage.UserDatas.Find(id);
+                    UserLogin userLogin = DataStorage.UserLogins.Where(obj => obj.email.Equals(userData.email)).FirstOrDefault();
+                    if (userData != null && userLogin != null)
+                    {
+                        DataStorage.UserDatas.Remove(userData);
+                        DataStorage.UserLogins.Remove(userLogin);
+                        DataStorage.SaveChanges();
+                        return RedirectToAction("ViewUsers");
+                    }
+                    else
+                    {
+                        TempData["Message"] = "User Not Found";
+                        return RedirectToAction("ViewUsers");
+                    }
+                }
+                else
+                {
+                    TempData["Message"] = "NULL ID is given";
+                    return RedirectToAction("ViewUsers");
                 }
             }
             else
@@ -316,8 +409,8 @@ namespace EntryTestManagement.Controllers
             }
             else
             {
-                 TempData["Message"] = "Dear Admin Kindly Login First";
-                 return RedirectToAction("Login");
+                TempData["Message"] = "Dear Admin Kindly Login First";
+                return RedirectToAction("Login");
             }
         }
 
@@ -337,8 +430,8 @@ namespace EntryTestManagement.Controllers
                 }
                 else
                 {
-                    admin.Image = Session["Image"].ToString();
-                    Session["Image"] = "";
+                    TempData["Message"] = "Image Not Uploaded";
+                    return RedirectToAction("Edit", new { id = admin.id });
                 }
                 admin.Role = "Sub";
                 DataStorage.Entry(admin).State = EntityState.Modified;
@@ -348,6 +441,87 @@ namespace EntryTestManagement.Controllers
             else
             {
                 return View(admin);
+            }
+        }
+
+        //Edit Users
+        [HttpGet]
+        public ActionResult EditUser(int? id)
+        {
+            if (Session["AdminEmail"] != null)
+            {
+                if (id != null)
+                {
+                    UserData foundUser = DataStorage.UserDatas.Find(id);
+                    if (foundUser != null)
+                    {
+                        return View(foundUser);
+                    }
+                    else
+                    {
+                        TempData["Message"] = "User Not Found";
+                        return RedirectToAction("ViewUsers");
+                    }
+                }
+                else
+                {
+                    TempData["Message"] = "Null ID is given";
+                    return RedirectToAction("ViewUsers");
+                }
+            }
+            else
+            {
+                TempData["Message"] = "Dear Admin Kindly Login First";
+                return RedirectToAction("Login");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult UpdateUser(UserData user)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    string name = "";
+                    string UploadPath = "";
+                    if (user.ImageFile != null)
+                    {
+                        name = Path.GetFileName(user.ImageFile.FileName);
+                        UploadPath = Server.MapPath("~\\Content\\styles\\img\\users\\" + name);
+                        user.Image = name;
+                        user.ImageFile.SaveAs(UploadPath);
+                    }
+                    else
+                    {
+                        TempData["Message"] = "Image Not Uploaded";
+                        return RedirectToAction("EditUser", new { id = user.id });
+                    }
+
+                    DataStorage.Entry(user).State = EntityState.Modified;
+                    DataStorage.SaveChanges();
+                    TempData["Message"] = "Information Updated Successfully";
+                    return RedirectToAction("ViewUsers");
+                }
+                else
+                {
+                    return View(user);
+                }
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage); 
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
             }
         }
 
@@ -369,7 +543,7 @@ namespace EntryTestManagement.Controllers
             }
             else
             {
-                 TempData["Message"] = "Dear Admin Kindly Login First";
+                TempData["Message"] = "Dear Admin Kindly Login First";
                 return RedirectToAction("Login");
             }
         }
@@ -406,7 +580,7 @@ namespace EntryTestManagement.Controllers
                 if (id != null)
                 {
                     var complain = DataStorage.Complaints.Find(id);
-                    if(complain != null)
+                    if (complain != null)
                     {
                         TempData["UserEmail"] = complain.UserEmail;
                         TempData["UserSubject"] = complain.Subject;
@@ -420,7 +594,7 @@ namespace EntryTestManagement.Controllers
                         TempData["UserEmail"] = comp.UserEmail;
                         TempData["UserSubject"] = comp.Subject;
                         TempData["UserDescription"] = comp.Description;
-                        TempData["Message"] = "Admin with ID : "+id+" Not Found";
+                        TempData["Message"] = "Admin with ID : " + id + " Not Found";
                         var complains = DataStorage.Complaints.ToList();
                         return View(complains);
                     }
@@ -471,6 +645,67 @@ namespace EntryTestManagement.Controllers
                 {
                     TempData["Message"] = "NULL ID is given";
                     return RedirectToAction("ViewComplaints");
+                }
+            }
+            else
+            {
+                TempData["Message"] = "Dear Admin Kindly Login First";
+                return RedirectToAction("Login");
+            }
+        }
+
+        //Update User Status
+        public ActionResult UpdateStatus(int? id)
+        {
+            if (Session["AdminEmail"] != null)
+            {
+                if (id != null)
+                {
+                    UserData user = DataStorage.UserDatas.Find(id);
+                    if (user != null)
+                    {
+                        string status = user.Status;
+                        if (status.Equals("Applied"))
+                        {
+                            status = "Paid";
+                        }
+                        else if (status.Equals("Paid"))
+                        {
+                            status = "Approved";
+                        }
+                        user.Status = status;
+                        try
+                        {
+                            DataStorage.SaveChanges();
+                        }
+                        catch (DbEntityValidationException e)
+                        {
+                            foreach (var eve in e.EntityValidationErrors)
+                            {
+                                Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                                    eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                                foreach (var ve in eve.ValidationErrors)
+                                {
+                                    Console.WriteLine("- Property: \"{0}\", Value: \"{1}\", Error: \"{2}\"",
+                                        ve.PropertyName,
+                                        eve.Entry.CurrentValues.GetValue<object>(ve.PropertyName),
+                                        ve.ErrorMessage);
+                                }
+                            }
+                            throw;
+                        }
+                        return RedirectToAction("ViewUsers");
+                    }
+                    else
+                    {
+                        TempData["Message"] = "User Not Found";
+                        return RedirectToAction("ViewUsers");
+                    }
+                }
+                else
+                {
+                    TempData["Message"] = "NULL ID is given";
+                    return RedirectToAction("ViewUsers");
                 }
             }
             else

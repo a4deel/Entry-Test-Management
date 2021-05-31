@@ -28,11 +28,11 @@
                             </div>
                             <hr />
                             <div class="recover-pass" style="margin-left:5.5rem;">
-                                @if(Session["Added"]!= null)
+                                @if(Session["Added"].Equals("Added"))
                                 {
                                     <a href="@Url.Action("Challan","User")" class="btn btn-primary text-decoration-none text-white">View Challan Form</a>
                                 }
-                                else if (Session["Added"] == null)
+                                else
                                 {
                                     <a href="@Url.Action("Add","User")" class="btn btn-primary text-decoration-none text-white">Register Your Personal Information</a>
                                 }

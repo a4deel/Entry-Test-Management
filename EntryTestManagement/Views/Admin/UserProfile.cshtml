@@ -1,0 +1,137 @@
+﻿@model EntryTestManagement.Models.UserData
+@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+    var styleURL = "/Content/styles";
+    var image = "";
+}
+@if (@Model != null)
+{
+    <div class="main-panel">
+        <div class="main-content">
+            <div class="content-wrapper">
+                <section id="user-profile">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card profile-with-cover">
+                                <div class="card-img-top img-fluid bg-cover height-300" style="background: url('@styleURL/img/gallery/back.jpg') 50%;"></div>
+                                <div class="media profil-cover-details row">
+                                    <div class="col-5">
+                                        <div class="align-self-start halfway-fab pl-3 pt-2">
+                                            <div class="text-left">
+                                                <h1 class="card-title white">
+                                                    @Model.FirstName
+                                                    @Model.LastName
+                                                </h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="align-self-center halfway-fab text-center">
+                                            <a class="profile-image">
+                                                @{image = @styleURL + "/img/users/" + @Model.Image; }
+                                                <img src="@image" class="rounded-circle img-border gradient-summer width-200"
+                                                     alt="Card image">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="about">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="content-header">About</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Personal Information</h5>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12 col-md-6 col-lg-4">
+                                                <ul class="no-list-style">
+                                                    <li class="mb-2">
+                                                        <span class="text-bold-500 primary"><a><i class="fa fa-address-card font-small-3"></i> Admin ID:</a></span>
+                                                        <span class="d-block overflow-hidden">@Model.id</span>
+                                                    </li>
+                                                    <li class="mb-2">
+                                                        <span class="text-bold-500 primary"><a><i class="fa fa-address-card font-small-3"></i> First Name:</a></span>
+                                                        <span class="d-block overflow-hidden">@Model.FirstName</span>
+                                                    </li>
+                                                    <li class="mb-2">
+                                                        <span class="text-bold-500 primary"><a><i class="fa fa-address-card font-small-3"></i> Last Name:</a></span>
+                                                        <span class="d-block overflow-hidden">@Model.LastName</span>
+                                                    </li>
+                                                    <li class="mb-2">
+                                                        <span class="text-bold-500 primary"><a><i class="ft-user font-small-3"></i> Gender:</a></span>
+                                                        <span class="d-block overflow-hidden">@Model.Gender</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-12 col-md-6 col-lg-4">
+                                                <ul class="no-list-style">
+                                                    <li class="mb-2">
+                                                        <span class="text-bold-500 primary"><a><i class="ft-mail font-small-3"></i> Email:</a></span>
+                                                        <a class="d-block overflow-hidden">@Model.email</a>
+                                                    </li>
+                                                    <li class="mb-2">
+                                                        <span class="text-bold-500 primary"><a><i class="fa fa-address-card font-small-3"></i> CNIC:</a></span>
+                                                        <span class="d-block overflow-hidden">@Model.CNIC</span>
+                                                    </li>
+                                                    <li class="mb-2">
+                                                        <span class="text-bold-500 primary"><a><i class="ft-smartphone font-small-3"></i> Phone Number:</a></span>
+                                                        <span class="d-block overflow-hidden">@Model.Contact</span>
+                                                    </li>
+                                                    <li class="mb-2">
+                                                        <span class="text-bold-500 primary"><a><i class="ft-globe font-small-3"></i> Address:</a></span>
+                                                        <span class="d-block overflow-hidden">@Model.Address</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-12 col-md-6 col-lg-4">
+                                                <ul class="no-list-style">
+                                                    <li class="mb-2">
+                                                        <span class="text-bold-500 primary"><a><i class="ft-briefcase font-small-3"></i> Status:</a></span>
+                                                        @{
+                                                            if (Model.Status.Equals("Applied"))
+                                                            {
+                                                                <span class="d-block overflow-hidden badge badge-warning">@Model.Status</span>
+                                                            }
+                                                            else if (Model.Status.Equals("Paid"))
+                                                            {
+                                                                <span class="d-block overflow-hidden badge badge-primary">@Model.Status</span>
+                                                            }
+                                                            else if (Model.Status.Equals("Approved"))
+                                                            {
+                                                                <span class="d-block overflow-hidden badge badge-success">@Model.Status</span>
+                                                            }
+                                                        }
+                                                    </li>
+                                                    <li class="mb-2">
+                                                        <span class="text-bold-500 primary"><a><i class="ft-briefcase font-small-3"></i> Matric Marks : </a></span>
+                                                        <span class="d-block overflow-hidden">@Model.Matric / 1100</span>
+                                                    </li>
+                                                    <li class="mb-2">
+                                                        <span class="text-bold-500 primary"><a><i class="ft-briefcase font-small-3"></i> FSC Marks :</a></span>
+                                                        <span class="d-block overflow-hidden">@Model.Inter/1100</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+                                                            }

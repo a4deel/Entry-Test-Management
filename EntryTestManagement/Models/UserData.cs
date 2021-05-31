@@ -51,8 +51,6 @@ namespace EntryTestManagement.Models
 
         public string Status { get; set; }
 
-        [Required(ErrorMessage = "Image is Required")]
         public HttpPostedFileBase ImageFile { get; set; }
-        public string ChallanNo { get; set; }
     }
 }

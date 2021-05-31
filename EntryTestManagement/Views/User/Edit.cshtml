@@ -16,28 +16,30 @@
                         <div class="px-3">
                             @using (@Html.BeginForm("EditUser", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
-                                { @Session["Image"] = @Model.Image.ToString();}
-                                    @Html.ValidationSummary(true)
-                                    if (@TempData["Message"] != null)
-                                    {
-                                    <p style="color:red !important;font-size:x-large;">@TempData["Message"]</p>
-                                    }
+                                @Html.ValidationSummary(true)
+                                if (@TempData["Message"] != null)
+                                {
+                                    <p style="font-size:x-large;" class="badge badge-danger">@TempData["Message"]</p>
+                                }
                                 @Html.AntiForgeryToken()
                                 <div class="form-body">
                                     <h4 class="form-section"><i class="ft-info"></i> About User</h4>
                                     @Html.HiddenFor(model => model.id)
+                                    @Html.HiddenFor(model => model.ChallanNo)
+                                    @Html.HiddenFor(model => model.Status)
+                                    @Html.HiddenFor(model => model.email)
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="userinput1">First Name</label>
-                                                @Html.TextBoxFor(user => user.FirstName, "", new { autofocus = "autofocus", @class = "form-control mb-1" })
+                                                @Html.TextBoxFor(user => user.FirstName, "", new { autofocus = "autofocus", ReadOnly="true", @class = "form-control mb-1" })
                                                 @Html.ValidationMessageFor(user => user.FirstName, "", new { @class = "badge badge-danger" })
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="userinput2">Last Name</label>
-                                                @Html.TextBoxFor(user => user.LastName, "", new { @class = "form-control mb-1" })
+                                                @Html.TextBoxFor(user => user.LastName, "", new { ReadOnly="true", @class = "form-control mb-1" })
                                                 @Html.ValidationMessageFor(user => user.LastName, "", new { @class = "badge badge-danger" })
                                             </div>
                                         </div>
@@ -46,7 +48,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="userinput4">Gender</label>
-                                                @Html.TextBoxFor(user => user.Gender, "", new { @class = "form-control mb-1" })
+                                                @Html.TextBoxFor(user => user.Gender, "", new { ReadOnly="true", @class = "form-control mb-1" })
                                                 @Html.ValidationMessageFor(user => user.Gender, "", new { @class = "badge badge-danger" })
                                             </div>
                                         </div>
@@ -58,29 +60,43 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    <h4 class="form-section"><i class="ft-book"></i> Education</h4>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="userinput4">Matric Marks</label>
+                                                @Html.TextBoxFor(user => user.Matric, "", new { ReadOnly="true", @class = "form-control mb-1" })
+                                                @Html.ValidationMessageFor(user => user.Matric, "", new { @class = "badge badge-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="userinput2">Intermediate Marks</label>
+                                                @Html.TextBoxFor(user => user.Inter, "", new { ReadOnly="true", @class = "form-control mb-1" })
+                                                @Html.ValidationMessageFor(user => user.Inter, "", new { @class = "badge badge-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
                                     <h4 class="form-section"><i class="ft-mail"></i> Contact Info & Bio</h4>
-
                                     <div class="form-group">
                                         <label for="userinput5">Age</label>
-                                        @Html.TextBoxFor(user => user.Age, "", new { @class = "form-control mb-1" })
+                                        @Html.TextBoxFor(user => user.Age, "", new { ReadOnly="true", @class = "form-control mb-1" })
                                         @Html.ValidationMessageFor(user => user.Age, "", new { @class = "badge badge-danger" })
                                     </div>
-
                                     <div class="form-group">
                                         <label for="userinput3">CNIC</label>
-                                        @Html.TextBoxFor(user => user.CNIC, "", new { @class = "form-control mb-1" })
+                                        @Html.TextBoxFor(user => user.CNIC, "", new { ReadOnly="true", @class = "form-control mb-1" })
                                         @Html.ValidationMessageFor(user => user.CNIC, "", new { @class = "badge badge-danger" })
                                     </div>
                                     <div class="form-group">
                                         <label for="userinput5">Contact Number</label>
-                                        @Html.TextBoxFor(user => user.Contact, "", new { @class = "form-control mb-1" })
+                                        @Html.TextBoxFor(user => user.Contact, "", new { ReadOnly="true", @class = "form-control mb-1" })
                                         @Html.ValidationMessageFor(user => user.Contact, "", new { @class = "badge badge-danger" })
                                     </div>
 
                                     <div class="form-group">
                                         <label for="userinput5">Address</label>
-                                        @Html.TextBoxFor(user => user.Address, "", new { @class = "form-control mb-1" })
+                                        @Html.TextBoxFor(user => user.Address, "", new { ReadOnly="true", @class = "form-control mb-1" })
                                         @Html.ValidationMessageFor(user => user.Address, "", new { @class = "badge badge-danger" })
                                     </div>
                                 </div>

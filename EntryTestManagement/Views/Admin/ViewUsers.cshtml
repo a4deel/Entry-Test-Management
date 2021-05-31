@@ -14,7 +14,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">View Admins</h4>
+                                <h4 class="card-title">View Users</h4>
                             </div>
                             @if (@TempData["Message"] != null)
                             {
@@ -30,52 +30,59 @@
                                                 <th>Name</th>
                                                 <th>Email</th>
                                                 <th>Contact</th>
-                                                <th>Address</th>
+                                                <th>User Status</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach (var admin in Model)
+                                            @foreach (var user in Model)
                                             {
                                                 var image = "";
-                                                if (@admin.Image != "" && File.Exists(Server.MapPath(@styleURL + "/" + @admin.Image)))
+                                                if (@user.Image != "" && File.Exists(Server.MapPath(@styleURL + "/" + @user.Image)))
                                                 {
-                                                    image = @styleURL + "/" + @admin.Image;
+                                                    image = @styleURL + "/" + @user.Image;
                                                 }
                                                 else
                                                 {
                                                     image = @styleURL + "/user.png";
                                                 }
-                                                var FullName = @admin.FirstName + " " + @admin.LastName;
+                                                var FullName = @user.FirstName + " " + @user.LastName;
                                                 <tr>
-                                                    <td>@admin.id</td>
+                                                    <td>@user.id</td>
                                                     <td><img src="@image" height="100" width="100" style="border-radius: 50%;color:white;"></td>
-                                                    <td><a href="@Url.Action("AdminProfile","Admin",new {@admin.id})">@FullName</a></td>
-                                                    <td>@admin.email</td>
-                                                    <td>@admin.Contact</td>
-                                                    <td>@admin.Address</td>
+                                                    <td><a href="@Url.Action("UserProfile","Admin",new {@user.id})">@FullName</a></td>
+                                                    <td>@user.email</td>
+                                                    <td>@user.Contact</td>
                                                     <td>
-                                                        @if (@Session["AdminRole"].Equals("Super") && !@admin.Role.Equals("Super"))
-                                                        {
-                                                            <a href="@Url.Action("Edit","Admin",new {@admin.id})" style="color:lightgreen;">
-                                                                <i class="ft-edit-2 font-medium-3 mr-2"></i>
-                                                            </a>
-                                                            <a href="@Url.Action("Delete","Admin",new {@admin.id})" style="color:red;">
-                                                                <i class="ft-x font-medium-3 mr-2"></i>
-                                                            </a>
-                                                        }
-                                                        else
-                                                        {
-                                                            <a class="success p-0" data-original-title="" title="" style="color:lightgreen  ;">
-                                                                <i class="ft-edit-2 font-medium-3 mr-2"></i>
-                                                            </a>
-                                                            <a class="danger p-0" data-original-title="" title="" style="color:red;">
-                                                                <i class="ft-x font-medium-3 mr-2"></i>
-                                                            </a>
+                                                        @{
+                                                            if (@user.Status.Equals("Applied"))
+                                                            {
+                                                                <a href="@Url.Action("UpdateStatus","Admin",new {@user.id})" style="color:lightgreen;">
+                                                                    <span class="d-block overflow-hidden btn btn-warning">@user.Status</span>
+                                                                </a>
+                                                            }
+                                                            else if (@user.Status.Equals("Paid"))
+                                                            {
+                                                                <a href="@Url.Action("UpdateStatus","Admin",new {@user.id})" style="color:lightgreen;">
+                                                                    <span class="d-block overflow-hidden btn btn-primary">@user.Status</span>
+                                                                </a>
+                                                            }
+                                                            else if (@user.Status.Equals("Approved"))
+                                                            {
+                                                                <span class="d-block overflow-hidden btn btn-success">@user.Status</span>
+                                                            }
                                                         }
                                                     </td>
+                                                    <td>
+                                                        <a href="@Url.Action("EditUser","Admin",new {@user.id})" style="color:lightgreen;">
+                                                            <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                                                        </a>
+                                                        <a href="@Url.Action("DeleteUser","Admin",new {@user.id})" style="color:red;">
+                                                            <i class="ft-x font-medium-3 mr-2"></i>
+                                                        </a>
+                                                    </td>
                                                 </tr>
-                                            }
+                                                            }
                                         </tbody>
                                         <tfoot>
                                             <tr>
@@ -83,9 +90,9 @@
                                                 <th>Image</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
-                                                <th>CNIC</th>
                                                 <th>Contact</th>
-                                                <th>Address</th>
+                                                <th>User Status</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </tfoot>
                                     </table>

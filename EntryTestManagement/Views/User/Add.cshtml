@@ -20,7 +20,7 @@
                                 @Html.ValidationSummary(true)
                                 if (@TempData["Message"] != null)
                                 {
-                                    <p style="color:red !important;font-size:x-large;">@TempData["Message"]</p>
+                                    <p style="font-size:x-large;" class="badge badge-danger">@TempData["Message"]</p>
                                 }
                                 @Html.AntiForgeryToken()
                                 <div class="form-body">
@@ -58,7 +58,6 @@
                                         </div>
                                     </div>
                                     <h4 class="form-section"><i class="ft-book"></i> Education</h4>
-
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">

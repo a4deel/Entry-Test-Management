@@ -1,9 +1,7 @@
 ﻿using EntryTestManagement.Models;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
-using iTextSharp.tool.xml;
 using System;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -93,12 +91,6 @@ namespace EntryTestManagement.Controllers
             }
         }
 
-        public ActionResult Logout()
-        {
-            Session.Clear();
-            return RedirectToAction("Login");
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Register(UserLogin user)
@@ -124,6 +116,12 @@ namespace EntryTestManagement.Controllers
             {
                 return View(user);
             }
+        }
+
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Login");
         }
 
         [HttpGet]
@@ -182,12 +180,13 @@ namespace EntryTestManagement.Controllers
                 string email = Session["UserEmail"].ToString();
                 string UploadPath = "";
                 var foundUser = DataStorage.UserDatas.Where(obj => obj.email.Equals(email)).FirstOrDefault();
-                var lastUser = DataStorage.UserDatas.LastOrDefault();
+                int count = DataStorage.UserDatas.Count();
                 if (foundUser == null)
                 {
-                    if(lastUser != null)
+                    if(count > 0)
                     {
-                        ID = lastUser.id + 1;
+                        int lastID = DataStorage.UserDatas.OrderByDescending(obj => obj.id).First().id;
+                        ID = lastID + 1;
                         user.ChallanNo = "BF520" + ID;
                     }
                     else
@@ -208,8 +207,8 @@ namespace EntryTestManagement.Controllers
                     }
                     else
                     {
-                        user.ChallanNo = "BF520" + ID;
-                        user.Image = "user.png";
+                        TempData["Message"] = "Image Not Uploaded";
+                        return RedirectToAction("Add");
                     }
                     DataStorage.UserDatas.Add(user);
                     DataStorage.SaveChanges();
@@ -306,7 +305,7 @@ namespace EntryTestManagement.Controllers
             {
                 if(id != null)
                 {
-                    var foundUser = DataStorage.UserDatas.Find(id);
+                    UserData foundUser = DataStorage.UserDatas.Find(id);
                     if (foundUser != null)
                     {
                         return View(foundUser);
@@ -333,29 +332,49 @@ namespace EntryTestManagement.Controllers
         [HttpPost]
         public ActionResult EditUser(UserData user)
         {
-            if (ModelState.IsValid)
+            try
             {
-                string name = "";
-                string UploadPath = "";
-                if (user.ImageFile != null)
+                if (ModelState.IsValid)
                 {
-                    name = Path.GetFileName(user.ImageFile.FileName);
-                    UploadPath = Server.MapPath("~\\Content\\styles\\img\\users\\" + name);
-                    user.Image = name;
-                    user.ImageFile.SaveAs(UploadPath);
+                    string name = "";
+                    string UploadPath = "";
+                    if (user.ImageFile != null)
+                    {
+                        name = Path.GetFileName(user.ImageFile.FileName);
+                        UploadPath = Server.MapPath("~\\Content\\styles\\img\\users\\" + name);
+                        user.Image = name;
+                        user.ImageFile.SaveAs(UploadPath);
+                    }
+                    else
+                    {
+                        TempData["Message"] = "Image Not Uploaded";
+                        return RedirectToAction("Edit", new { id = user.id });
+                    }
+
+                    DataStorage.Entry(user).State = EntityState.Modified;
+                    DataStorage.SaveChanges();
+                    TempData["Message"] = "Information Updated Successfully";
+                    return RedirectToAction("index");
                 }
-                //else
-                //{
-                //    user.Image = Session["Image"].ToString();
-                //    Session["Image"] = "";
-                //}
-                DataStorage.Entry(user).State = EntityState.Modified;
-                DataStorage.SaveChanges();
-                return RedirectToAction("index");
+                else
+                {
+                    return View(user);
+                }
             }
-            else
+            catch (DbEntityValidationException dbEx)
             {
-                return View(user);
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
             }
         }
 

@@ -10,6 +10,8 @@
         <EntityTypeShape EntityType="EntryTestDetailsDBModel1.UserLogin" Width="1.5" PointX="4" PointY="0.625" />
         <EntityTypeShape EntityType="EntryTestDetailsDBModel1.Complaint" Width="1.5" PointX="5.625" PointY="0.625" />
         <EntityTypeShape EntityType="EntryTestDetailsDBModel1.UserData" Width="1.5" PointX="7.375" PointY="0.625" />
+        <EntityTypeShape EntityType="EntryTestDetailsDBModel1.Group" Width="1.5" PointX="3.875" PointY="2.375" />
+        <EntityTypeShape EntityType="EntryTestDetailsDBModel1.Hall" Width="1.5" PointX="2.25" PointY="2.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
