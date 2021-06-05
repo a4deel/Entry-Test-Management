@@ -52,5 +52,7 @@ namespace EntryTestManagement.Models
         public string Status { get; set; }
 
         public HttpPostedFileBase ImageFile { get; set; }
+
+        public string ChallanNo { get; set; }
     }
 }

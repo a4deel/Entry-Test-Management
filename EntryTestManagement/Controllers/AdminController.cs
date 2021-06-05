@@ -715,6 +715,134 @@ namespace EntryTestManagement.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult ManageVenue()
+        {
+
+            if (Session["AdminEmail"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["Message"] = "Dear Admin Kindly Login First";
+                return RedirectToAction("Login");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult AddHall()
+        {
+
+            if (Session["AdminEmail"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["Message"] = "Dear Admin Kindly Login First";
+                return RedirectToAction("Login");
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddHall(Hall hall)
+        {
+            if (ModelState.IsValid)
+            {
+                var hallInfo = DataStorage.Halls.Where(obj => obj.Name.Equals(hall.Name)).FirstOrDefault();
+                if (hallInfo == null) 
+                {
+                    hall.IsFull = "0";
+                    hall.Count = 0;
+                    DataStorage.Configuration.ValidateOnSaveEnabled = false;
+                    DataStorage.Halls.Add(hall);
+                    DataStorage.SaveChanges();
+                    return RedirectToAction("index");
+                }
+                else
+                {
+                    TempData["Message"] = "Hall already exists";
+                    return RedirectToAction("AddHall");
+                }
+            }
+            else
+            {
+                return View(hall);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult AddGroup()
+        {
+
+            if (Session["AdminEmail"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                TempData["Message"] = "Dear Admin Kindly Login First";
+                return RedirectToAction("Login");
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddGroup(Group group)
+        {
+            if (ModelState.IsValid)
+            {
+                var groupInfo = DataStorage.Groups.Where(obj => obj.Name.Equals(group.Name)).FirstOrDefault();
+                if (groupInfo == null)
+                {
+                    group.IsFull = "0";
+                    DataStorage.Configuration.ValidateOnSaveEnabled = false;
+                    DataStorage.Groups.Add(group);
+                    DataStorage.SaveChanges();
+                    return RedirectToAction("index");
+                }
+                else
+                {
+                    TempData["Message"] = "Group already exists";
+                    return RedirectToAction("AddGroup");
+                }
+            }
+            else
+            {
+                return View(group);
+            }
+        }
+
+        public ActionResult Groups()
+        {
+            if (Session["AdminEmail"] != null)
+            {
+                var groups = DataStorage.Groups.ToList();
+                return View(groups);
+            }
+            else
+            {
+                TempData["Message"] = "Dear Admin Kindly Login First";
+                return RedirectToAction("Login");
+            }
+        }
+
+        public ActionResult Halls()
+        {
+            if (Session["AdminEmail"] != null)
+            {
+                var halls = DataStorage.Halls.ToList();
+                return View(halls);
+            }
+            else
+            {
+                TempData["Message"] = "Dear Admin Kindly Login First";
+                return RedirectToAction("Login");
+            }
+        }
+
         private string GetMD5(string str)
         {
             MD5 md5 = new MD5CryptoServiceProvider();

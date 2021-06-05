@@ -40,8 +40,6 @@
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
           <Property Name="UserEmail" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'E:\FYP\DEVELOPMENT\ENTRYTESTMANAGEMENT\ENTRYTESTMANAGEMENT\APP_DATA\ENTRYTESTDETAILSDB.MDF.dbo.Groups' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Groups">
           <Key>
             <PropertyRef Name="Id" />
@@ -52,8 +50,6 @@ warning 6002: The table/view 'E:\FYP\DEVELOPMENT\ENTRYTESTMANAGEMENT\ENTRYTESTMA
           <Property Name="Time" Type="time" Precision="7" />
           <Property Name="Date" Type="date" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'E:\FYP\DEVELOPMENT\ENTRYTESTMANAGEMENT\ENTRYTESTMANAGEMENT\APP_DATA\ENTRYTESTDETAILSDB.MDF.dbo.Halls' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Halls">
           <Key>
             <PropertyRef Name="Id" />
@@ -63,6 +59,19 @@ warning 6002: The table/view 'E:\FYP\DEVELOPMENT\ENTRYTESTMANAGEMENT\ENTRYTESTMA
           <Property Name="IsFull" Type="nvarchar" MaxLength="50" />
           <Property Name="Capacity" Type="numeric" Precision="18" Scale="0" />
           <Property Name="Count" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="RollNumberSlip">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="RollNo" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="FormID" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="HallName" Type="nchar" MaxLength="10" />
+          <Property Name="SeatNo" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Time" Type="time" Precision="7" />
+          <Property Name="UserEmail" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="UserData">
           <Key>
@@ -95,26 +104,11 @@ warning 6002: The table/view 'E:\FYP\DEVELOPMENT\ENTRYTESTMANAGEMENT\ENTRYTESTMA
           <EntitySet Name="AdminData" EntityType="Self.AdminData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdminLogin" EntityType="Self.AdminLogin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Complaint" EntityType="Self.Complaint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Halls" EntityType="Self.Halls" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RollNumberSlip" EntityType="Self.RollNumberSlip" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserData" EntityType="Self.UserData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserLogin" EntityType="Self.UserLogin" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Groups" EntityType="Self.Groups" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Groups].[Id] AS [Id], 
-    [Groups].[Name] AS [Name], 
-    [Groups].[IsFull] AS [IsFull], 
-    [Groups].[Time] AS [Time], 
-    [Groups].[Date] AS [Date]
-    FROM [dbo].[Groups] AS [Groups]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Halls" EntityType="Self.Halls" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Halls].[Id] AS [Id], 
-    [Halls].[Name] AS [Name], 
-    [Halls].[IsFull] AS [IsFull], 
-    [Halls].[Capacity] AS [Capacity], 
-    [Halls].[Count] AS [Count]
-    FROM [dbo].[Halls] AS [Halls]</DefiningQuery>
-          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -128,6 +122,7 @@ warning 6002: The table/view 'E:\FYP\DEVELOPMENT\ENTRYTESTMANAGEMENT\ENTRYTESTMA
           <EntitySet Name="UserDatas" EntityType="EntryTestDetailsDBModel1.UserData" />
           <EntitySet Name="Groups" EntityType="EntryTestDetailsDBModel1.Group" />
           <EntitySet Name="Halls" EntityType="EntryTestDetailsDBModel1.Hall" />
+          <EntitySet Name="RollNumberSlips" EntityType="EntryTestDetailsDBModel1.RollNumberSlip" />
         </EntityContainer>
         <EntityType Name="AdminData">
           <Key>
@@ -197,7 +192,7 @@ warning 6002: The table/view 'E:\FYP\DEVELOPMENT\ENTRYTESTMANAGEMENT\ENTRYTESTMA
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IsFull" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsFull" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Time" Type="Time" Precision="7" />
           <Property Name="Date" Type="DateTime" Precision="0" />
         </EntityType>
@@ -207,9 +202,22 @@ warning 6002: The table/view 'E:\FYP\DEVELOPMENT\ENTRYTESTMANAGEMENT\ENTRYTESTMA
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IsFull" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsFull" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Capacity" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Count" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="RollNumberSlip">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="RollNo" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="FormID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="HallName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SeatNo" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Time" Type="Time" Precision="7" />
+          <Property Name="UserEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -302,6 +310,20 @@ warning 6002: The table/view 'E:\FYP\DEVELOPMENT\ENTRYTESTMANAGEMENT\ENTRYTESTMA
                 <ScalarProperty Name="Capacity" ColumnName="Capacity" />
                 <ScalarProperty Name="IsFull" ColumnName="IsFull" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RollNumberSlips">
+            <EntityTypeMapping TypeName="EntryTestDetailsDBModel1.RollNumberSlip">
+              <MappingFragment StoreEntitySet="RollNumberSlip">
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="SeatNo" ColumnName="SeatNo" />
+                <ScalarProperty Name="HallName" ColumnName="HallName" />
+                <ScalarProperty Name="FormID" ColumnName="FormID" />
+                <ScalarProperty Name="RollNo" ColumnName="RollNo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

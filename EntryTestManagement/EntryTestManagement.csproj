@@ -242,6 +242,9 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\RollNumberSlip.cs">
+      <DependentUpon>EntryTestModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UserData.cs">
       <DependentUpon>EntryTestModel.tt</DependentUpon>
     </Compile>
@@ -310,11 +313,15 @@
     <Content Include="Views\Admin\ViewUsers.cshtml" />
     <Content Include="Views\Admin\UserProfile.cshtml" />
     <Content Include="Views\Admin\EditUser.cshtml" />
+    <Content Include="Views\Admin\AddHall.cshtml" />
+    <Content Include="Views\Admin\AddGroup.cshtml" />
     <None Include="Views\Home\index.cshtml" />
     <None Include="Views\Admin\Login.cshtml" />
     <None Include="Views\Admin\ViewAdmins.cshtml" />
     <Content Include="Views\Shared\_ChallanRollLayout.cshtml" />
     <Content Include="Views\User\UserProfile.cshtml" />
+    <Content Include="Views\Admin\Groups.cshtml" />
+    <Content Include="Views\Admin\Halls.cshtml" />
     <None Include="Views\User\Challan.cshtml" />
     <Content Include="Views\User\index.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />

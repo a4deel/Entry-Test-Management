@@ -1,0 +1,64 @@
+﻿@model EntryTestManagement.Models.Group
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="main-panel">
+    <!-- BEGIN : Main Content-->
+    <div class="main-content">
+        <div class="content-wrapper">
+            <div class="row match-height">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title" id="basic-layout-icons">Add Group Details</h4>
+                        </div>
+                        <div class="card-content">
+                            <div class="px-3">
+                                @using (@Html.BeginForm("AddGroup", "Admin", FormMethod.Post))
+                                {
+                                    @Html.ValidationSummary(true)
+                                    if (@TempData["Message"] != null)
+                                    {
+                                        <p style="color:red !important;font-size:x-large;">@TempData["Message"]</p>
+                                    }
+                                    @Html.AntiForgeryToken()
+                                    <div class="form-body">
+                                        <br />
+                                        <h4 class="form-section"><i class="ft-info"></i> About Group</h4>
+                                        <hr />
+                                        <div class="form-group">
+                                            <label for="userinput5">Test Group</label>
+                                            @Html.TextBoxFor(group => group.Name, "", new { @class = "form-control mb-1" })
+                                            @Html.ValidationMessageFor(group => group.Name, "", new { @class = "badge badge-danger" })
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="userinput3">Test Date</label>
+                                            @Html.TextBoxFor(group => group.Date, "", new { type = "date", @class = "form-control mb-1" })
+                                            @Html.ValidationMessageFor(group => group.Date, "", new { @class = "badge badge-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="userinput3">Test Time</label>
+                                            @Html.TextBoxFor(group => group.Time, "", new { type = "time", @class = "form-control mb-1" })
+                                            <i class="ft-clock"></i>
+                                            @Html.ValidationMessageFor(group => group.Time, "", new { @class = "badge badge-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="recover-pass">
+                                        <input type="submit" id="submit" name="submit" class="btn btn-raised btn-primary mr-1" value="Add Group">
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
