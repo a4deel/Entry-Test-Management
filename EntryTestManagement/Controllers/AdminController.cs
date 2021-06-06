@@ -665,17 +665,42 @@ namespace EntryTestManagement.Controllers
                     if (user != null)
                     {
                         string status = user.Status;
+                        RollNumberSlip rollObject = new RollNumberSlip();
                         if (status.Equals("Applied"))
                         {
                             status = "Paid";
                         }
                         else if (status.Equals("Paid"))
                         {
+                            var group = DataStorage.Groups.FirstOrDefault();
+                            var hall = DataStorage.Halls.FirstOrDefault();
+                            if (hall != null && group !=  null)
+                            {
+                                if(hall.Count < hall.Capacity && group.IsFull.Equals("0") && hall.IsFull.Equals("0"))
+                                {
+                                    hall.Count += 1;
+                                    rollObject.RollNo = 10000 + hall.Count;
+                                    rollObject.FormID = 100000 + hall.Count;
+                                    rollObject.Date = group.Date;
+                                    rollObject.Time = group.Time;
+                                    rollObject.SeatNo = hall.Count;
+                                    rollObject.HallName = hall.Name;
+                                    rollObject.UserEmail = user.email;
+                                }
+                                else if(hall.Count == hall.Capacity)
+                                {
+                                    hall.IsFull = "1";
+                                    group.IsFull = "1";
+                                    TempData["Message"] = "Current Group & Hall is Full. Kindly Add New.";
+                                    return RedirectToAction("ViewUsers");
+                                }
+                            }
                             status = "Approved";
                         }
                         user.Status = status;
                         try
                         {
+                            DataStorage.RollNumberSlips.Add(rollObject);
                             DataStorage.SaveChanges();
                         }
                         catch (DbEntityValidationException e)
@@ -715,6 +740,11 @@ namespace EntryTestManagement.Controllers
             }
         }
 
+        private void CheckVenueDetails()
+        {
+
+
+        }
         [HttpGet]
         public ActionResult ManageVenue()
         {

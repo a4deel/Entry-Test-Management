@@ -1,5 +1,6 @@
 ﻿using EntryTestManagement.Models;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.IO;
@@ -245,6 +246,35 @@ namespace EntryTestManagement.Controllers
                 else
                 {
                     TempData["Message"] = "Information not added yet.";
+                    return RedirectToAction("index");
+                }
+            }
+            else
+            {
+                TempData["Message"] = "Dear User Kindly Login First";
+                return RedirectToAction("Login");
+            }
+        }
+
+        public ActionResult RollNumberSlip()
+        {
+            if (Session["UserEmail"] != null)
+            {
+                string email = Session["UserEmail"].ToString();
+                var foundUser = DataStorage.UserDatas.Where(obj => obj.email.Equals(email)).FirstOrDefault();
+                var rollNoSlip = DataStorage.RollNumberSlips.Where(obj => obj.UserEmail.Equals(email)).FirstOrDefault();
+                var groupName = DataStorage.Groups.FirstOrDefault().Name;
+                if (foundUser != null)
+                {
+                    TempData["Image"] = foundUser.Image;
+                    TempData["Group"] = groupName;
+                    TempData["UserName"] = foundUser.FirstName + " "+foundUser.LastName;
+                    TempData["CNIC"] = foundUser.CNIC;
+                    return View(rollNoSlip);
+                }
+                else
+                {
+                    TempData["Message"] = "Roll Number Slip not generated yet";
                     return RedirectToAction("index");
                 }
             }

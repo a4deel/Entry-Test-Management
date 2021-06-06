@@ -1,0 +1,116 @@
+﻿@model EntryTestManagement.Models.RollNumberSlip
+@{
+    Layout = "~/Views/Shared/_ChallanRollLayout.cshtml";
+    var styleURL = "/Content/styles/img/users";
+    var image = @styleURL + "/" + TempData["Image"];
+    string date = Model.Date.ToString();
+    string[] split = date.Split(' ');
+}
+
+<center>
+    <center style="margin-top: 25px;"> Punjab University College Of Information Technology</center>
+    <center>University Of Punjab, Lahore</center> <br>
+    <center><b>Entrance Test Roll No. Slip</b></center>
+    <center style="font-size:small">For BS(SE/CS/IT) Programs (Session Fall 2021)</center><br>
+
+    <table align="center" style="border: 1px solid black; width: 250px;">
+        <tr align="center">
+            <td><b><u> Entrance Test Roll No. Slip</u></b></td>
+
+        </tr>
+        <tr align="center">
+            <td><h2><b>@Model.RollNo</b></h2></td>
+        </tr>
+    </table>
+
+    <table style="margin: 25px;">
+        <tr>
+            <td style="width: 850px;"><h5>Form ID: @Model.FormID<b></b></h5></td>
+            <td rowspan="4">
+                <img src="@image" style="border: 1px solid black; margin: 1px;">
+            </td>
+        </tr>
+        <tr>
+            <td><h5>Name: <b>@TempData["UserName"]</b></h5></td>
+        </tr>
+        <tr>
+            <td><h5>Father's Name: <b>Tahir Saleem</b></h5></td>
+        </tr>
+        <tr>
+            <td><h5>CNIC/Form B: <b>@TempData["CNIC"]</b></h5></td>
+        </tr>
+    </table> <br>
+
+    <div class="d-flex justify-content-left">
+        <div class="d-flex justify-content-center" style="border: 1px solid black; margin-left: 40px; margin-bottom: 5px; width: 220px;">
+            <p style="text-align: center;">
+                <u> <b> Test Date/ Reporting Time </b></u> <br>
+                @TempData["Group"]<br>
+                @split[0]<br>
+                @Model.Time
+            </p><br>
+
+        </div>
+        <div class="d-flex justify-content-center" style="border: 1px solid black; margin-left: 15%; margin-bottom: 5px; width: 400px; ">
+            <p style="text-align: center;">
+                <u> <b>Test Center </b></u> <br>
+                Board Of Intermediate & Secondary  <br>
+                Education (BISE) Examination Halls , Board<br>
+                Building, 49-A, Lawrence Road, Lahore
+            </p><br>
+        </div>
+        <div class="d-flex justify-content-center" style="border: 1px solid black; margin-left: 15%; margin-right: 20px; margin-bottom: 5px; width: 200px;">
+            <p style="text-align: center;">
+                <u> <b>Sitting Plan</b>  </u> <br>
+                @Model.HallName <br>
+                Seat No: @Model.SeatNo<br>
+            </p><br>
+        </div>
+    </div><br>
+    <h4 style="margin-left: 20px;"><b>Note: </b></h4>
+
+    <div class="data">
+        <ul>
+            <li>
+                <p> It is <b>Compulsory to bring this entrance test Roll No. slip and original picture identity to appear in the test.</b></p>
+                <ul>
+                    <li>
+                        <p>Possible picture identity Original CNIC or Passport or Driving License or Secondary School Certificate with picture</p>
+                    </li>
+                    <li>
+                        <p>A Candidate is allowed to enter the test center only with <b>Original, picture identity.</b></p>
+                    </li>
+                    <li>
+                        <p>
+                            Photocopy of any picture identity is <b>NOT acceptable</b> to enter the test center
+                        </p>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <p>Mobile phones, handbags, calculators, gadgets etc, or any helping material is <b>Not allowed </b>in the test center</p>
+            </li>
+            <li>
+                <p>
+                    Keep visiting <u>www.pucit.edu.pk</u> or <u>www.pu.edu.pk/pucit</u> for updates
+                </p>
+            </li>
+            <li>
+                <p>For further queries you may contact UAN: 111-923-923 Ext(149,161) or send an e-mail: <u>info@pucit.edu.pk</u></p>
+            </li>
+        </ul>
+    </div>
+    <br><br><br>
+    <table align="center" style="border: 2px solid black; width: 250px; height: 100px;">
+        <tr align="center">
+            <td><h2> <b>@TempData["Group"]</b></h2></td>
+
+        </tr>
+
+    </table>
+    <br><br><br>
+    <br />
+    <div class="recover-pass">
+        <a href="@Url.Action("index","User")" class="btn btn-primary text-decoration-none text-white">Back To Home</a>
+    </div>
+</center>

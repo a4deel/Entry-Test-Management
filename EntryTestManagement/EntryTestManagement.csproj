@@ -351,6 +351,7 @@
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Shared\_LoginHead.cshtml" />
     <Content Include="Views\Shared\_LoginFooter.cshtml" />
+    <Content Include="Views\User\RollNumberSlip.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

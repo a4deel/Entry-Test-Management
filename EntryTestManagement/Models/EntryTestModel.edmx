@@ -64,7 +64,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RollNo" Type="numeric" Precision="18" Scale="0" />
           <Property Name="FormID" Type="numeric" Precision="18" Scale="0" />
           <Property Name="HallName" Type="nchar" MaxLength="10" />

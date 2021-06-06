@@ -32,15 +32,6 @@
                                                             class="menu-title">My Profile</span>
                         </a>
                     </li>
-                    @if (Session["AdminRole"].Equals("Super"))
-                    {
-                        <li class="nav-item">
-                            <a href="@Url.Action("Add","Admin")">
-                                <i class="ft-edit"></i><span data-i18n=""
-                                                                class="menu-title">Add Admin</span>
-                            </a>
-                        </li>
-                    }
                     <li class="nav-item">
                         <a href="@Url.Action("ViewAdmins","Admin")">
                             <i class="ft-grid"></i><span data-i18n=""
@@ -50,11 +41,11 @@
                     <li class="nav-item">
                         <a href="@Url.Action("ViewUsers","Admin")">
                             <i class="ft-layout"></i><span data-i18n=""
-                                                            class="menu-title">View Users Status</span>
+                                                            class="menu-title">View Users</span>
                         </a>
                     </li>
                     <li class="has-sub nav-item">
-                        <a href="#"><i class="ft-grid"></i><span data-i18n="" class="menu-title">Manage Venue Details</span></a>
+                        <a href="#"><i class="ft-grid"></i><span data-i18n="" class="menu-title">Manage Venue</span></a>
                         <ul class="menu-content">
                             <li>
                                 <a href="@Url.Action("Groups","Admin")" class="menu-item">Groups</a>
