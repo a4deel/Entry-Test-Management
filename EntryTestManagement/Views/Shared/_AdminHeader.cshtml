@@ -1,12 +1,12 @@
 ﻿@{
-    var @styleURL = "/Content/styles";
+    var @styleURL = "/Content/styles/img";
 }
 <div class="wrapper">
-    <div data-active-color="white" data-background-color="" data-image class="app-sidebar">
+    <div data-active-color="white" data-background-color="black" data-image class="app-sidebar">
         <div class="sidebar-header">
             <div class="logo clearfix">
-                <a href="/Admin/Index" class="logo-text float-left">
-                    <div class="logo-img"><img src="@styleURL/img/gallery/logo.png" style="width: 120%;" /></div><span class="text align-middle">FCIT</span>
+                <a href="@Url.Action("index","Admin")" class="logo-text float-left">
+                    <div class="logo-img"><img src="@styleURL/gallery/logo.png" style="width: 120%;" /></div><span class="text align-middle">FCIT</span>
                 </a><a id="sidebarToggle" href="javascript:;" class="nav-toggle d-none d-sm-none d-md-none d-lg-block">
                     <i data-toggle="expanded" class="toggle-icon ft-toggle-right"></i>
                 </a><a id="sidebarClose"
@@ -24,24 +24,24 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        @{ 
+                        @{
                             var id = @Session["AdminID"];
                         }
                         <a href="@Url.Action("AdminProfile","Admin",new {@id})">
                             <i class="ft-user"></i><span data-i18n=""
-                                                            class="menu-title">My Profile</span>
+                                                         class="menu-title">My Profile</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="@Url.Action("ViewAdmins","Admin")">
                             <i class="ft-grid"></i><span data-i18n=""
-                                                            class="menu-title">View Admins</span>
+                                                         class="menu-title">View Admins</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="@Url.Action("ViewUsers","Admin")">
                             <i class="ft-layout"></i><span data-i18n=""
-                                                            class="menu-title">View Users</span>
+                                                           class="menu-title">View Users</span>
                         </a>
                     </li>
                     <li class="has-sub nav-item">
@@ -58,7 +58,7 @@
                     <li class="nav-item">
                         <a href="@Url.Action("ViewComplaints","Admin")">
                             <i class="ft-mail"></i><span data-i18n=""
-                                                              class="menu-title">View Complaints</span>
+                                                         class="menu-title">View Complaints</span>
                         </a>
                     </li>
                 </ul>
@@ -67,5 +67,6 @@
                 </div>
             </div>
         </div>
-        <div class="sidebar-background"></div>
+        <div class="sidebar-background" style="background-image: url('/Content/styles/img/sidebar-bg/05.jpg')"></div>
     </div>
+</div>

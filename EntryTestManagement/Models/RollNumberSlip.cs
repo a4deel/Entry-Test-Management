@@ -14,10 +14,6 @@ namespace EntryTestManagement.Models
     
     public partial class RollNumberSlip
     {
-        public RollNumberSlip()
-        {
-        }
-
         public int Id { get; set; }
         public Nullable<decimal> RollNo { get; set; }
         public Nullable<decimal> FormID { get; set; }

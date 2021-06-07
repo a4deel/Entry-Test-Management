@@ -54,5 +54,8 @@ namespace EntryTestManagement.Models
         public HttpPostedFileBase ImageFile { get; set; }
 
         public string ChallanNo { get; set; }
+
+        [Required(ErrorMessage = "Father Name is Required")]
+        public string FatherName { get; set; }
     }
 }

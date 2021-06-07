@@ -266,6 +266,7 @@ namespace EntryTestManagement.Controllers
                 var groupName = DataStorage.Groups.FirstOrDefault().Name;
                 if (foundUser != null)
                 {
+                    TempData["Father"] = foundUser.FatherName;
                     TempData["Image"] = foundUser.Image;
                     TempData["Group"] = groupName;
                     TempData["UserName"] = foundUser.FirstName + " "+foundUser.LastName;
